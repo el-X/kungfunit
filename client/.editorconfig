@@ -1,0 +1,24 @@
+# EditorConfig helps developers define and maintain consistent coding styles between different editors and IDEs.
+# editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+# for every file
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 120
+
+# for bower-config-files, eslint-config-files, json-files, and sass-stylesheets
+[*.{bowerrc,eslintrc,json,scss}]
+indent_style = space
+indent_size = 2
+
+# for markdown-files
+[*.md]
+trim_trailing_whitespace = false
