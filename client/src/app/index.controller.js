@@ -3,12 +3,10 @@
 
     angular
         .module('kungfunit')
-        .run(runBlock);
+        .controller('IndexController', IndexController);
 
     /** @ngInject */
-    function runBlock($log) {
-
-        $log.debug('runBlock end');
+    function IndexController() {
     }
 
 })();

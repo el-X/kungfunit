@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('client')
+        .module('kungfunit')
         .directive('acmeMalarkey', acmeMalarkey);
 
     /** @ngInject */

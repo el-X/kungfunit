@@ -1,11 +1,11 @@
 'use strict';
 
-describe('The main view', function () {
+describe('The example view', function () {
     var page;
 
     beforeEach(function () {
-        browser.get('/index.html');
-        page = require('./main.po');
+        browser.get('/example.html');
+        page = require('./example.po.js');
     });
 
     it('should include jumbotron with correct data', function () {

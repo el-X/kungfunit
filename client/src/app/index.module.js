@@ -1,7 +1,15 @@
 (function () {
     'use strict';
 
-    angular
-        .module('client', ['ngAnimate', 'ngResource', 'ui.router', 'ngMaterial', 'toastr']);
+    angular.module('kungfunit', [
+        'kungfunit.about',
+        'kungfunit.example',
+        'kungfunit.home',
+        'ngAnimate',
+        'ngMaterial',
+        'ngResource',
+        'toastr',
+        'ui.router',
+        'ui.router.title']);
 
 })();

@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('client')
-        .controller('MainController', MainController);
+        .module('kungfunit.example')
+        .controller('ExampleController', ExampleController);
 
     /** @ngInject */
-    function MainController($timeout, webDevTec, toastr) {
+    function ExampleController($timeout, webDevTec, toastr) {
         var vm = this;
 
         vm.awesomeThings = [];

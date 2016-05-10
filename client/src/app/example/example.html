@@ -7,7 +7,7 @@
                 <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
                 Always a pleasure scaffolding your apps.
             </p>
-            <md-button class="md-raised animated infinite" ng-class="main.classAnimation" ng-click="main.showToastr()">
+            <md-button class="md-raised animated infinite" ng-class="vm.classAnimation" ng-click="vm.showToastr()">
                 Splendid Toastr
             </md-button>
             <p>
@@ -17,7 +17,7 @@
         </section>
 
         <div class="techs" layout-align="center">
-            <md-card ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
+            <md-card ng-repeat="awesomeThing in vm.awesomeThings | orderBy:'rank'">
                 <md-card-content>
                     <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}"
                          alt="{{ awesomeThing.title }}">
