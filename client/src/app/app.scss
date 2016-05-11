@@ -54,10 +54,6 @@ html {
   padding: 0.2em 0;
 }
 
-md-toolbar.md-default-theme {
-  background-color: black;
-}
-
 section.jumbotron {
   margin-bottom: 30px;
   padding: 1px 30px;
@@ -68,20 +64,6 @@ section.jumbotron {
 
   h1 {
     font-size: 3em;
-  }
-}
-
-.techs {
-  display: flex;
-  flex-flow: row wrap;
-
-  md-card {
-    width: 30%;
-
-    img.pull-right {
-      float: right;
-      width: 100px;
-    }
   }
 }
 

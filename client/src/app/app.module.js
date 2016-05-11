@@ -8,7 +8,6 @@
         'ngAnimate',
         'ngMaterial',
         'ngResource',
-        'toastr',
         'ui.router',
         'ui.router.title']);
 

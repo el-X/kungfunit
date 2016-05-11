@@ -3,10 +3,11 @@
 
     angular
         .module('kungfunit')
-        .controller('IndexController', IndexController);
+        .controller('AppController', AppController);
 
     /** @ngInject */
-    function IndexController() {
+    function AppController() {
+
     }
 
 })();
