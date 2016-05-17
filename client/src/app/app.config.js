@@ -14,7 +14,7 @@
             .primaryPalette('grey', {
                 'default': 'A100'           // use white as the primary hue
             })
-            .accentPalette('teal')
+            .accentPalette('blue')
             .warnPalette('red')
             .backgroundPalette('grey', {
                 'default': '50'             // use a light-grey as the background color
