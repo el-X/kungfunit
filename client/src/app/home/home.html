@@ -1,18 +1,25 @@
-<md-content>
+<md-content layout-fill>
     <div class="quantities">
         <md-card ng-repeat="quantity in vm.quantities | orderBy:'name'">
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">{{ quantity.name }}</span>
                 </md-card-title-text>
+                <!--<md-card-actions layout-align="end">-->
+                    <!--<md-button class="md-icon-button" aria-label="Favorite">-->
+                        <!--<md-icon>close</md-icon>-->
+                    <!--</md-button>-->
+                <!--</md-card-actions>-->
             </md-card-title>
             <md-card-content layout="row" layout-wrap>
                 <div layout="column" flex="45">
                     <md-input-container md-no-float>
-                        <input ng-model="lhsValue" ng-change="vm.convertFromLeftToRight(this)" type="number" aria-label="Left hand side value">
+                        <input ng-model="lhsValue" ng-change="vm.convertFromLeftToRight(this)" type="number"
+                               aria-label="Left hand side value">
                     </md-input-container>
                     <md-input-container>
-                        <md-select ng-model="lhsUnit" md-on-close="vm.convertFromLeftToRight(this)" aria-label="Left hand side unit">
+                        <md-select ng-model="lhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
+                                   aria-label="Left hand side unit">
                             <!-- select the first unit -->
                             <md-option ng-repeat="unit in quantity.units" value="{{unit.symbol}}" ng-selected="$first">
                                 {{unit.name}}
@@ -23,10 +30,12 @@
                 <h2 flex="10" class="md-headline" style="text-align: center">=</h2>
                 <div layout="column" flex="45">
                     <md-input-container md-no-float>
-                        <input ng-model="rhsValue" ng-change="vm.convertFromRightToLeft(this)" type="number" aria-label="Right hand side value">
+                        <input ng-model="rhsValue" ng-change="vm.convertFromRightToLeft(this)" type="number"
+                               aria-label="Right hand side value">
                     </md-input-container>
                     <md-input-container>
-                        <md-select ng-model="rhsUnit" md-on-close="vm.convertFromRightToLeft(this)" aria-label="Right hand side unit">
+                        <md-select ng-model="rhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
+                                   aria-label="Right hand side unit">
                             <!-- select the second unit -->
                             <md-option ng-repeat="unit in quantity.units" value="{{unit.symbol}}"
                                        ng-selected="$index == 1">
