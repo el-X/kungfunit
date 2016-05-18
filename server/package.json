@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "monitor": "nodemon ./bin/www",
-    "deploy": "gcloud preview app deploy --project kungfunit4"
+    "deploy": "gcloud preview app deploy --project kungfunit"
   },
   "dependencies": {
     "body-parser": "^1.14.2",
