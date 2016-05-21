@@ -6,19 +6,27 @@
         .controller('HomeController', HomeController);
 
     /** @ngInject */
-    function HomeController(unitService) {
+    function HomeController(unitService, lodash) {
         var vm = this;
 
-        vm.quantities = [];
+        vm.unitClasses = [];
+        vm.unitQuantityNames = [];
+        vm.selectedUnitQuantities = ["Length", "Time", "Area"];
 
         vm.convertFromLeftToRight = convertFromLeftToRight;
         vm.convertFromRightToLeft = convertFromRightToLeft;
+        vm.isUnitQuantitySelected = isUnitQuantitySelected;
 
-        retrieveQuantities();
+        retrieveUnitClasses();
 
-        function retrieveQuantities() {
-            unitService.getQuantities({}, function (quantities) {
-                vm.quantities = quantities.data.quantities;
+        function retrieveUnitClasses() {
+            unitService.getUnits({}, function (unitClasses) {
+                vm.unitClasses = unitClasses.data.classes;
+
+                // get all available unit quantitiy names for selection purposes
+                lodash.forEach(vm.unitClasses, function (unitClass) {
+                    vm.unitQuantityNames = lodash.concat(vm.unitQuantityNames, lodash.map(unitClass.quantities, "name"));
+                });
             });
         }
 
@@ -40,6 +48,10 @@
             }, function (conversion) {
                 converterScope.lhsValue = (conversion.data.conversions[0].convertedUnit);
             });
+        }
+
+        function isUnitQuantitySelected(unitQuantity) {
+            return lodash.includes(vm.selectedUnitQuantities, unitQuantity);
         }
     }
 })();

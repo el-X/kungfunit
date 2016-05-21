@@ -3,5 +3,6 @@
 
     angular.module('kungfunit.home', [
         'kungfunit.unit-service',
+        'ngLodash',
         'ui.router']);
 })();

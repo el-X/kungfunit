@@ -8,12 +8,12 @@
         .factory('unitService', unitService);
 
     /*
-     * This service factory provides information for units and unit conversions.
+     * This service factory provides information for unitClasses and unit conversions.
      */
     /** @ngInject */
     function unitService($resource) {
         var service = $resource('http://localhost:8080/units/', {}, {
-            getQuantities: {
+            getUnits: {
                 method: 'GET'
             },
             convert: {
