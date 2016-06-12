@@ -10,8 +10,9 @@
         var vm = this;
 
         vm.unitClasses = [];
+        vm.unitQuantities = [];
         vm.unitQuantityNames = [];
-        vm.selectedUnitQuantities = ["Length", "Time", "Area"];
+        vm.selectedUnitQuantities = ["Length", "Time", "Area", "Mass", "Temperature"];
 
         vm.convertFromLeftToRight = convertFromLeftToRight;
         vm.convertFromRightToLeft = convertFromRightToLeft;
@@ -23,8 +24,9 @@
             unitService.getUnits({}, function (unitClasses) {
                 vm.unitClasses = unitClasses.data.classes;
 
-                // get all available unit quantitiy names for selection purposes
+                // get all available unit quantities and quantity names
                 lodash.forEach(vm.unitClasses, function (unitClass) {
+                    vm.unitQuantities = lodash.concat(vm.unitQuantities, unitClass.quantities);
                     vm.unitQuantityNames = lodash.concat(vm.unitQuantityNames, lodash.map(unitClass.quantities, "name"));
                 });
             });
