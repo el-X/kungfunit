@@ -14,10 +14,10 @@
             .primaryPalette('grey', {
                 'default': 'A100'           // use white as the primary hue
             })
-            .accentPalette('blue')
+            .accentPalette('blue-grey')
             .warnPalette('red')
             .backgroundPalette('grey', {
-                'default': '50'             // use a light-grey as the background color
+                'default': 'A100'             // use white as the background color
         });
     }
 

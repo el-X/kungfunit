@@ -43,6 +43,11 @@ html {
   font-family: 'Roboto Slab', serif;
 }
 
+body {
+  background-color: #fafafa;
+  height: 100%;
+}
+
 [layout=row] {
   flex-direction: row;
 }
