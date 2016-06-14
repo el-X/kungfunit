@@ -13,8 +13,8 @@
         vm.unitQuantities = [];
         vm.unitQuantityNames = [];
         vm.selectedUnitQuantities = ["Length", "Time", "Area", "Mass", "Temperature"];
-        vm.selectedQuantity = null;
-        vm.searchedQuantity = null;
+        vm.searchTerm = "";
+        vm.toggle = true;
 
         vm.convertFromLeftToRight = convertFromLeftToRight;
         vm.convertFromRightToLeft = convertFromRightToLeft;

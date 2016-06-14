@@ -1,5 +1,6 @@
 // bower:scss
 // endbower
+$background-color: #fafafa;
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 
 @font-face {
@@ -44,12 +45,11 @@ html {
 }
 
 body {
-  background-color: #fafafa;
-  height: 100%;
+  background-color: $background-color;
 }
 
-[layout=row] {
-  flex-direction: row;
+md-content {
+  background-color: $background-color;
 }
 
 .browsehappy {
