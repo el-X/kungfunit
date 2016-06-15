@@ -59,24 +59,15 @@ md-content {
   padding: 0.2em 0;
 }
 
-section.jumbotron {
-  margin-bottom: 30px;
-  padding: 1px 30px;
-  background-color: #5aadbb;
-  text-align: center;
-
-  color: white;
-
-  h1 {
-    font-size: 3em;
-  }
-}
-
 // Turn off spinners for number inputs
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 // injector
