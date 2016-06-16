@@ -1,18 +1,27 @@
 // bower:scss
 // endbower
+
+// Colors
 $background-color: #fafafa;
+
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot#); /* For IE6-8 */
   src: local('Material Icons'),
   local('MaterialIcons-Regular'),
   url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
   url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
   url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'From Where You Are';
+  src: local('From Where You Are'),
+  url(../assets/fonts/FromWhereYouAre.ttf) format('truetype');
 }
 
 .material-icons {
@@ -50,6 +59,18 @@ body {
 
 md-content {
   background-color: $background-color;
+}
+
+.yin-yang-font {
+  font-family: 'From Where You Are';
+}
+
+.yin-color {
+  color: #37474f;
+}
+
+.yang-color {
+  color: #90a4ae;
 }
 
 .browsehappy {
