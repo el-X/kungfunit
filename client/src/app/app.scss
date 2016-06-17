@@ -3,6 +3,8 @@
 
 // Colors
 $background-color: #fafafa;
+$yin-color: #37474f;
+$yang-color: #90a4ae;
 
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 
@@ -66,11 +68,11 @@ md-content {
 }
 
 .yin-color {
-  color: #37474f;
+  color: $yin-color;
 }
 
 .yang-color {
-  color: #90a4ae;
+  color: $yang-color;
 }
 
 .browsehappy {

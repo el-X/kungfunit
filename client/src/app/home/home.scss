@@ -1,3 +1,48 @@
-.highlight {
-  color: #90a4ae;
+// Converters
+.converter-grid-margin {
+  margin: 8px 0px 8px 8px;
 }
+
+.close-icon {
+  top: -4px;
+  right: -8px;
+}
+
+// Logger
+.logger {
+  height: auto !important;
+  overflow-y: auto;
+  border-width: 1px 0px 0px !important;
+}
+
+.converter-filter-subheader {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+// Converter filter
+.converter-filter-grid-margin {
+  margin: 8px 0px;
+}
+
+.converter-filter-button {
+  text-transform: none;
+}
+
+.converter-filter-check-button {
+  width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  line-height: 24px !important;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+
+.highlight {
+  color: $yang-color;
+}
+
+

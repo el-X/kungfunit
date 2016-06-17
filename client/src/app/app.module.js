@@ -3,6 +3,7 @@
 
     angular.module('kungfunit', [
         'kungfunit.about',
+        'kungfunit.datasets',
         'kungfunit.example',
         'kungfunit.home',
         'ngAnimate',

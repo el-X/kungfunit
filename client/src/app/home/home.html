@@ -1,16 +1,18 @@
 <div layout="row" layout-xs="column">
     <!-- unit converters and the logger to the left -->
-    <md-grid-list md-cols="3" md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-cols-lg="3" md-cols-xl="4"
-                  md-row-height="250px" md-gutter="8px" style="margin: 8px 0px 8px 8px" flex>
+    <md-grid-list md-cols="3" md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-cols-lg="3" md-cols-xl="3"
+                  md-row-height="260px" md-gutter="8px" class="converter-grid-margin" flex>
         <!-- unit converters -->
         <md-grid-tile ng-repeat="quantity in vm.unitQuantities | orderBy:'name'"
-                      ng-if="vm.isUnitQuantitySelected(quantity.name)">
+                      ng-if="vm.isUnitQuantitySelected(quantity.name)"
+                      ng-init="quantityName = quantity.name">
             <md-card layout-fill>
                 <md-card-header>
                     <md-card-header-text class="md-headline">
-                        {{ quantity.name }}
+                        {{ quantityName }}
                     </md-card-header-text>
-                    <md-button class="md-icon-button" aria-label="Close converter" ng-click="vm.toggleConverter(quantity.name)" style="top: -4px; right: -8px">
+                    <md-button class="md-icon-button close-icon" ng-click="vm.toggleConverter(quantityName)"
+                               aria-label="Close converter">
                         <md-icon>close</md-icon>
                     </md-button>
                 </md-card-header>
@@ -25,7 +27,7 @@
                             <md-select ng-model="lhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
                                        aria-label="Left hand side unit">
                                 <!-- select the first unit -->
-                                <md-option ng-repeat="unit in quantity.units" value="{{unit.symbol}}"
+                                <md-option ng-repeat="unit in quantity.units" ng-value="unit"
                                            ng-selected="$first">
                                     {{unit.name}}
                                 </md-option>
@@ -35,15 +37,15 @@
                     <h2 flex="10" class="md-headline" style="text-align: center">=</h2>
                     <div layout="column" flex="45">
                         <md-input-container md-no-float>
-                            <input ng-model="rhsValue" ng-model-options="{ debounce: 1000 }"
-                                   ng-change="vm.convertFromRightToLeft(this)" type="number"
+                            <input ng-model="rhsValue" ng-change="vm.convertFromRightToLeft(this)"
+                                   ng-model-options="{ debounce: 1000 }" type="number"
                                    aria-label="Right hand side value">
                         </md-input-container>
                         <md-input-container>
                             <md-select ng-model="rhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
                                        aria-label="Right hand side unit">
                                 <!-- select the second unit -->
-                                <md-option ng-repeat="unit in quantity.units" value="{{unit.symbol}}"
+                                <md-option ng-repeat="unit in quantity.units" ng-value="unit"
                                            ng-selected="$index == 1">
                                     {{unit.name}}
                                 </md-option>
@@ -54,7 +56,7 @@
             </md-card>
         </md-grid-tile>
         <!-- logger -->
-        <md-grid-tile md-colspan="1" md-colspan-md="2" md-colspan-lg="3" md-colspan-xl="4" hide-xs hide-sm>
+        <md-grid-tile md-colspan="1" md-colspan-md="2" md-colspan-lg="3" md-colspan-xl="3" hide-xs hide-sm>
             <md-card layout-fill>
                 <md-card-header>
                     <md-card-header-text class="md-title">
@@ -62,10 +64,10 @@
                     </md-card-header-text>
                 </md-card-header>
                 <md-card-content>
-                    <md-input-container class="md-block">
-                        <textarea ng-model="vm.logMessage" md-no-autogrow rows="6"
-                                  style="height: inherit; overflow-y: auto; border-width: 1px 0px 0px"
-                                  readonly></textarea>
+                    <md-input-container class="md-block" >
+                        <textarea ng-model="vm.logMessages" class="logger" rows="5"
+                                   readonly md-no-autogrow aria-label="Logger">
+                        </textarea>
                     </md-input-container>
                 </md-card-content>
             </md-card>
@@ -84,16 +86,18 @@
                 <input type="text" ng-model="searchTerm.name" placeholder="Search for a converter">
             </md-input-container>
             <div ng-repeat="class in vm.unitClasses">
-                <span class="md-subhead" style="text-transform: uppercase; font-weight: bold;">{{class.name}}</span>
+                <span class="md-subhead converter-filter-subheader">{{class.name}}</span>
                 <md-grid-list md-row-height="80px" md-cols="3" md-cols-sm="2" md-cols-xs="2" md-gutter="16px"
-                              style="margin: 8px 0px">
-                    <md-grid-tile ng-repeat="quantity in class.quantities | orderBy:'name' | filter:searchTerm">
-                        <md-button md-whiteframe="2" style="text-transform: none;" layout-fill
-                                   ng-click="vm.toggleConverter(quantity.name)">
-                            <span class="md-subhead" md-highlight-text="searchTerm.name" md-highlight-flags="i">{{quantity.name}}</span>
+                              class="converter-filter-grid-margin">
+                    <md-grid-tile ng-repeat="quantity in class.quantities | orderBy:'name' | filter:searchTerm"
+                                  ng-init="quantityName = quantity.name">
+                        <md-button md-whiteframe="2" ng-click="vm.toggleConverter(quantityName)"
+                                   class="converter-filter-button" layout-fill>
+                            <span class="md-subhead" md-highlight-text="searchTerm.name" md-highlight-flags="i">{{quantityName}}</span>
                         </md-button>
-                        <md-button class="md-fab md-mini" ng-click="vm.toggleConverter(quantity.name)" ng-show="vm.isUnitQuantitySelected(quantity.name)"
-                                   style="width: 24px; height: 24px; min-height: 24px; line-height: 24px; padding: 0; margin:0; position: absolute; right: -10px; top: -10px">
+                        <md-button class="md-fab md-mini converter-filter-check-button"
+                                   ng-click="vm.toggleConverter(quantityName)"
+                                   ng-show="vm.isUnitQuantitySelected(quantityName)">
                             <md-icon>check</md-icon>
                         </md-button>
                     </md-grid-tile>

@@ -6,7 +6,7 @@
         .controller('HomeController', HomeController);
 
     /** @ngInject */
-    function HomeController(unitService, lodash) {
+    function HomeController(unitService, lodash, moment) {
         var vm = this;
 
         vm.unitClasses = [];
@@ -14,8 +14,7 @@
         vm.unitQuantityNames = [];
         vm.selectedUnitQuantities = ["Length", "Time", "Temperature"];
         vm.searchTerm = "";
-        vm.toggle = false;
-        vm.logMessage = "2016.05.19: 13:37 - Currency: 1 Bitcoin (BTC) equals 392.16 Euro (EUR) on 2016.05.19";
+        vm.logMessages = "";
 
         vm.convertFromLeftToRight = convertFromLeftToRight;
         vm.convertFromRightToLeft = convertFromRightToLeft;
@@ -25,7 +24,7 @@
         retrieveUnitClasses();
 
         /**
-         * Retrives the unit classes and its contained quantities via REST.
+         * Retrieves the unit classes and its contained quantities via REST.
          */
         function retrieveUnitClasses() {
             unitService.getUnits({}, function (unitClasses) {
@@ -47,10 +46,12 @@
         function convertFromLeftToRight(converterScope) {
             unitService.convert({
                 q: converterScope.lhsValue,
-                source: converterScope.lhsUnit,
-                target: converterScope.rhsUnit
+                source: converterScope.lhsUnit.symbol,
+                target: converterScope.rhsUnit.symbol
             }, function (conversion) {
                 converterScope.rhsValue = (conversion.data.conversions[0].convertedUnit);
+                logConversion(converterScope.quantityName, converterScope.lhsValue, converterScope.lhsUnit.name, converterScope.lhsUnit.symbol,
+                    converterScope.rhsValue, converterScope.rhsUnit.name, converterScope.rhsUnit.symbol);
             });
         }
 
@@ -62,10 +63,12 @@
         function convertFromRightToLeft(converterScope) {
             unitService.convert({
                 q: converterScope.rhsValue,
-                source: converterScope.rhsUnit,
-                target: converterScope.lhsUnit
+                source: converterScope.rhsUnit.symbol,
+                target: converterScope.lhsUnit.symbol
             }, function (conversion) {
                 converterScope.lhsValue = (conversion.data.conversions[0].convertedUnit);
+                logConversion(converterScope.quantityName, converterScope.lhsValue, converterScope.lhsUnit.name, converterScope.lhsUnit.symbol,
+                    converterScope.rhsValue, converterScope.rhsUnit.name, converterScope.rhsUnit.symbol);
             });
         }
 
@@ -92,5 +95,28 @@
             }
         }
 
+        /**
+         * Responsible for logging the conversions performed.
+         *
+         * @param quantityName the name of the quantity in which the conversion was
+         * @param sourceValue the source value
+         * @param sourceUnitName the full name of the source unit
+         * @param sourceUnitSymbol the symbolic name of the source unit
+         * @param targetValue the target value
+         * @param targetUnitName the full name of the target unit
+         * @param targetUnitSymbol the symbolic name of the target unit
+         * @param currencyRateDate the date of the currency rate used for the conversion
+         */
+        function logConversion(quantityName, sourceValue, sourceUnitName, sourceUnitSymbol, targetValue, targetUnitName, targetUnitSymbol, currencyRateDate) {
+            var date = moment().format('YYYY.MM.DD HH:mm:ss');
+
+            var logMessage = date + " - " + quantityName + ": ";
+            logMessage += sourceValue + " " + sourceUnitName + " [" + sourceUnitSymbol + "]";
+            logMessage += " = ";
+            logMessage += targetValue + " " + targetUnitName + " [" + targetUnitSymbol + "]";
+            logMessage += currencyRateDate ? " on " + currencyRateDate : "";
+
+            vm.logMessages = vm.logMessages ? logMessage + "\n" + vm.logMessages : logMessage;
+        }
     }
 })();

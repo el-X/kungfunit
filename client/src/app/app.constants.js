@@ -5,6 +5,4 @@
     angular
         .module('kungfunit')
         .constant('malarkey', malarkey)
-        .constant('moment', moment);
-
 })();
