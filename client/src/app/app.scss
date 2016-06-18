@@ -63,6 +63,11 @@ md-content {
   background-color: $background-color;
 }
 
+md-input-container textarea[md-no-autogrow].md-input {
+  height: inherit;
+  overflow-y: auto;
+}
+
 .yin-yang-font {
   font-family: 'From Where You Are';
 }

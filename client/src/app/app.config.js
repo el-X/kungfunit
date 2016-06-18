@@ -11,9 +11,7 @@
         $logProvider.debugEnabled(true);
 
         $mdThemingProvider.theme('default')
-            .primaryPalette('grey', {
-                'default': 'A100'           // use white as the primary hue
-            })
+            .primaryPalette('grey')
             .accentPalette('blue-grey')
             .warnPalette('red')
             .backgroundPalette('grey', {

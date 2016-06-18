@@ -1,31 +1,31 @@
-<div layout="column" layout-align="center center">
-    <md-input-container>
-        <label>Quantity</label>
-        <md-select ng-model="selectedQuantity"
-                   aria-label="Classes">
-            <!-- select the first quantity -->
-            <md-optgroup ng-repeat="class in vm.unitClasses" label="{{class.name}}">
-                <md-option ng-repeat="quantity in class.quantities" ng-value="quantity.units" ng-selected="$first">
-                    {{quantity.name}}
-                </md-option>
-            </md-optgroup>
-        </md-select>
-    </md-input-container>
-    <div layout="row">
-        <md-input-container flex>
-            <label>Source Unit</label>
-            <md-select ng-model="selectedSourceUnit"
-                       aria-label="Source Unit">
+<md-toolbar layout="row" md-whiteframe="4" style="background-color: #fafafa;" hide-sm hide-xs>
+    <div class="md-toolbar-tools" layout="row" layout-align="start stretch">
+        <!-- Quantity selector -->
+        <md-input-container class="unit-selector" flex="20">
+            <label>Quantity</label>
+            <md-select ng-model="selectedQuantity">
+                <!-- select the first quantity -->
+                <md-optgroup ng-repeat="class in vm.unitClasses" label="{{class.name}}">
+                    <md-option ng-repeat="quantity in class.quantities" ng-value="quantity.units">
+                        {{quantity.name}}
+                    </md-option>
+                </md-optgroup>
+            </md-select>
+        </md-input-container>
+        <!-- Source unit selector -->
+        <md-input-container class="md-subhead unit-selector" flex-offset="10" flex="15">
+            <label>Source unit</label>
+            <md-select ng-model="selectedSourceUnit" ng-disabled="!selectedQuantity">
                 <!-- select the first unit -->
                 <md-option ng-repeat="unit in selectedQuantity" ng-value="unit.symbol" ng-selected="$first">
                     {{unit.name}}
                 </md-option>
             </md-select>
         </md-input-container>
-        <md-input-container flex>
-            <label>Target Unit</label>
-            <md-select ng-model="selectedTargetUnit"
-                       aria-label="Target Unit">
+        <!-- Target unit selector -->
+        <md-input-container class="md-subhead unit-selector" flex-offset="10" flex="15">
+            <label>Target unit</label>
+            <md-select ng-model="selectedTargetUnit" ng-disabled="!selectedQuantity">
                 <!-- select the second unit -->
                 <md-option ng-repeat="unit in selectedQuantity" ng-value="unit.symbol" ng-selected="$index == 1">
                     {{unit.name}}
@@ -33,15 +33,21 @@
             </md-select>
         </md-input-container>
     </div>
-    <div layout="row" layout-padding>
-        <md-input-container flex>
-        <textarea ng-model="vm.sourceDataset" rows="5" aria-label="Source Dataset">
+</md-toolbar>
+<div layout="row" layout-align="center stretch">
+    <md-input-container class="md-block dataset-input-container" flex="50">
+        <textarea class="dataset-input-source" rows="32" ng-model="vm.sourceDataset" aria-label="Source Dataset"
+                  md-no-autogrow>
               </textarea>
-        </md-input-container>
-        <md-input-container flex>
-        <textarea ng-model="vm.targetDataset" rows="5" aria-label="Target Dataset">
+    </md-input-container>
+    <md-button class="md-fab convert-button" ng-click="vm.convertDataset()"
+               ng-disabled="!selectedQuantity || !vm.sourceDataset">
+        <md-tooltip md-direction="left" style="text-transform: uppercase">Convert</md-tooltip>
+        <md-icon>play_arrow</md-icon>
+    </md-button>
+    <md-input-container class="md-block dataset-input-container" flex="50">
+        <textarea class="dataset-input-target" rows="32" ng-model="vm.targetDataset" aria-label="Target Dataset"
+                  md-no-autogrow readonly>
               </textarea>
-        </md-input-container>
-    </div>
+    </md-input-container>
 </div>
-

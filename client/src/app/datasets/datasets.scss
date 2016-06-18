@@ -1,0 +1,29 @@
+// Unit selector
+.unit-selector {
+  top: 4px;
+}
+
+// Dataset
+.dataset-input-container {
+  margin: 0;
+  padding: 0 0 0 16px;
+  background-color: white;
+}
+
+.dataset-input-source {
+  border-width: 0 1px 0 0 !important;
+}
+
+.dataset-input-target {
+  border-width: 0 !important;
+}
+
+// Convert button
+.convert-button {
+  top: 50%;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+}

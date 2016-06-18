@@ -1,18 +1,22 @@
 // Converters
 .converter-grid-margin {
-  margin: 8px 0px 8px 8px;
+  margin: 8px 0 8px 8px;
 }
 
-.close-icon {
+.converter-hover:hover {
+  md-card-header-text {
+    color: $yang-color;
+  }
+}
+
+.converter-close-icon {
   top: -4px;
   right: -8px;
 }
 
 // Logger
 .logger {
-  height: auto !important;
-  overflow-y: auto;
-  border-width: 1px 0px 0px !important;
+  border-width: 1px 0 0 !important;
 }
 
 .converter-filter-subheader {
@@ -22,7 +26,7 @@
 
 // Converter filter
 .converter-filter-grid-margin {
-  margin: 8px 0px;
+  margin: 8px 0;
 }
 
 .converter-filter-button {
@@ -44,5 +48,3 @@
 .highlight {
   color: $yang-color;
 }
-
-
