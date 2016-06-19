@@ -24,7 +24,7 @@
                                    aria-label="Left hand side value">
                         </md-input-container>
                         <md-input-container>
-                            <md-select ng-model="lhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
+                            <md-select ng-model="lhsUnit" ng-change="vm.convertFromLeftToRight(this)"
                                        aria-label="Left hand side unit">
                                 <!-- select the first unit -->
                                 <md-option ng-repeat="unit in quantity.units" ng-value="unit"
@@ -42,7 +42,7 @@
                                    aria-label="Right hand side value">
                         </md-input-container>
                         <md-input-container>
-                            <md-select ng-model="rhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
+                            <md-select ng-model="rhsUnit" ng-change="vm.convertFromLeftToRight(this)"
                                        aria-label="Right hand side unit">
                                 <!-- select the second unit -->
                                 <md-option ng-repeat="unit in quantity.units" ng-value="unit"

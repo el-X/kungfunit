@@ -210,6 +210,56 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Misc",
+      "quantities": [
+        {
+          "name": "Currency",
+          "units": [
+            {
+              "name": "United States Dollar",
+              "symbol": "USD"
+            },
+            {
+              "name": "Euro",
+              "symbol": "EUR"
+            },
+            {
+              "name": "Japanese Yen",
+              "symbol": "JPY"
+            },
+            {
+              "name": "British Pound Sterling",
+              "symbol": "GBP"
+            },
+            {
+              "name": "Australian Dollar",
+              "symbol": "AUD"
+            },
+            {
+              "name": "Swiss Franc",
+              "symbol": "CHF"
+            },
+            {
+              "name": "Canadian Dollar",
+              "symbol": "CAD"
+            },
+            {
+              "name": "Mexican Peso",
+              "symbol": "MXN"
+            },
+            {
+              "name": "Chinese Yuan",
+              "symbol": "CNY"
+            },
+            {
+              "name": "New Zealand Dollar",
+              "symbol": "NZD"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

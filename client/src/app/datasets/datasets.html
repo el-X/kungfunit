@@ -15,7 +15,7 @@
         <!-- Source unit selector -->
         <md-input-container class="md-subhead unit-selector" flex-offset="10" flex="15">
             <label>Source unit</label>
-            <md-select ng-model="selectedSourceUnit" ng-disabled="!selectedQuantity">
+            <md-select ng-model="selectedSourceUnit" ng-disabled="!selectedQuantity" ng-change="changed = true">
                 <!-- select the first unit -->
                 <md-option ng-repeat="unit in selectedQuantity" ng-value="unit.symbol" ng-selected="$first">
                     {{unit.name}}
@@ -25,7 +25,7 @@
         <!-- Target unit selector -->
         <md-input-container class="md-subhead unit-selector" flex-offset="10" flex="15">
             <label>Target unit</label>
-            <md-select ng-model="selectedTargetUnit" ng-disabled="!selectedQuantity">
+            <md-select ng-model="selectedTargetUnit" ng-disabled="!selectedQuantity" ng-change="changed = true">
                 <!-- select the second unit -->
                 <md-option ng-repeat="unit in selectedQuantity" ng-value="unit.symbol" ng-selected="$index == 1">
                     {{unit.name}}
@@ -36,13 +36,15 @@
 </md-toolbar>
 <div layout="row" layout-align="center stretch">
     <md-input-container class="md-block dataset-input-container" flex="50">
-        <textarea class="dataset-input-source" rows="32" ng-model="vm.sourceDataset" aria-label="Source Dataset"
+        <textarea class="dataset-input-source" rows="32" ng-model="vm.sourceDataset" ng-change="changed = true"
+                  placeholder="Place your comma-separated list of values here, pick your desired units and you are ready to convert."
+                  aria-label="Source Dataset"
                   md-no-autogrow>
               </textarea>
     </md-input-container>
-    <md-button class="md-fab convert-button" ng-click="vm.convertDataset()"
-               ng-disabled="!selectedQuantity || !vm.sourceDataset">
-        <md-tooltip md-direction="left" style="text-transform: uppercase">Convert</md-tooltip>
+    <md-button class="md-fab convert-button" ng-click="vm.convertDataset(); changed = false;"
+               ng-disabled="!(!(!vm.sourceDataset || vm.sourceDataset.length === 0) && selectedQuantity && changed)">
+        <md-tooltip md-direction="left">CONVERT</md-tooltip>
         <md-icon>play_arrow</md-icon>
     </md-button>
     <md-input-container class="md-block dataset-input-container" flex="50">
