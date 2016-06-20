@@ -236,26 +236,6 @@
             {
               "name": "Australian Dollar",
               "symbol": "AUD"
-            },
-            {
-              "name": "Swiss Franc",
-              "symbol": "CHF"
-            },
-            {
-              "name": "Canadian Dollar",
-              "symbol": "CAD"
-            },
-            {
-              "name": "Mexican Peso",
-              "symbol": "MXN"
-            },
-            {
-              "name": "Chinese Yuan",
-              "symbol": "CNY"
-            },
-            {
-              "name": "New Zealand Dollar",
-              "symbol": "NZD"
             }
           ]
         }

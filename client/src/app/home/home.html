@@ -11,6 +11,12 @@
                     <md-card-header-text class="md-headline">
                         {{ quantityName }}
                     </md-card-header-text>
+                    <md-datepicker class="converter-date-input" ng-if="quantityName == 'Currency'"
+                                   ng-model="$parent.date"
+                                   ng-change="vm.convertFromLeftToRight($parent)"
+                                   ng-init="$parent.date = vm.date;"
+                                   md-min-date="vm.minDate" md-max-date="vm.maxDate"
+                                   md-open-on-focus></md-datepicker>
                     <md-button class="md-icon-button converter-close-icon" ng-click="vm.toggleConverter(quantityName)"
                                aria-label="Close converter">
                         <md-icon>close</md-icon>
@@ -24,7 +30,7 @@
                                    aria-label="Left hand side value">
                         </md-input-container>
                         <md-input-container>
-                            <md-select ng-model="lhsUnit" ng-change="vm.convertFromLeftToRight(this)"
+                            <md-select ng-model="lhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
                                        aria-label="Left hand side unit">
                                 <!-- select the first unit -->
                                 <md-option ng-repeat="unit in quantity.units" ng-value="unit"
@@ -42,7 +48,7 @@
                                    aria-label="Right hand side value">
                         </md-input-container>
                         <md-input-container>
-                            <md-select ng-model="rhsUnit" ng-change="vm.convertFromLeftToRight(this)"
+                            <md-select ng-model="rhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
                                        aria-label="Right hand side unit">
                                 <!-- select the second unit -->
                                 <md-option ng-repeat="unit in quantity.units" ng-value="unit"
@@ -66,7 +72,7 @@
                 <md-card-content>
                     <md-input-container class="md-block" style="margin: 8px 0;">
                         <textarea ng-model="vm.logMessages" class="logger" rows="6"
-                                   readonly md-no-autogrow aria-label="Logger">
+                                  readonly md-no-autogrow aria-label="Logger">
                         </textarea>
                     </md-input-container>
                 </md-card-content>

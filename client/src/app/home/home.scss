@@ -14,6 +14,14 @@
   right: -8px;
 }
 
+.converter-date-input {
+  top: -6px !important;
+
+  .md-datepicker-input-container {
+       margin: 0;
+  }
+}
+
 // Logger
 .logger {
   border-width: 1px 0 0 !important;

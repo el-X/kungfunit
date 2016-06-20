@@ -9,10 +9,17 @@
     function HomeController(unitService, lodash, moment) {
         var vm = this;
 
+        vm.date = moment().toDate();
+        vm.minDate = new Date(
+            vm.date.getFullYear(),
+            vm.date.getMonth(),
+            vm.date.getDate() - 4);
+        vm.maxDate = new Date();
+
         vm.unitClasses = [];
         vm.unitQuantities = [];
         vm.unitQuantityNames = [];
-        vm.selectedUnitQuantities = ["Length", "Time", "Temperature"];
+        vm.selectedUnitQuantities = ["Area", "Length", "Time", "Temperature", "Currency"];
         vm.searchTerm = "";
         vm.logMessages = "";
 
@@ -44,14 +51,17 @@
          * @param converterScope contains all parameters necessary for the conversion
          */
         function convertFromLeftToRight(converterScope) {
+            var date = formatDate(converterScope.date);
+
             unitService.convert({
                 q: converterScope.lhsValue,
                 source: converterScope.lhsUnit.symbol,
-                target: converterScope.rhsUnit.symbol
+                target: converterScope.rhsUnit.symbol,
+                date: date
             }, function (conversion) {
                 converterScope.rhsValue = (conversion.data.conversions[0].convertedUnit);
                 logConversion(converterScope.quantityName, converterScope.lhsValue, converterScope.lhsUnit.name, converterScope.lhsUnit.symbol,
-                    converterScope.rhsValue, converterScope.rhsUnit.name, converterScope.rhsUnit.symbol);
+                    converterScope.rhsValue, converterScope.rhsUnit.name, converterScope.rhsUnit.symbol, converterScope.date);
             });
         }
 
@@ -61,14 +71,17 @@
          * @param converterScope contains all parameters necessary for the conversion
          */
         function convertFromRightToLeft(converterScope) {
+            var date = formatDate(converterScope.date);
+
             unitService.convert({
                 q: converterScope.rhsValue,
                 source: converterScope.rhsUnit.symbol,
-                target: converterScope.lhsUnit.symbol
+                target: converterScope.lhsUnit.symbol,
+                date: date
             }, function (conversion) {
                 converterScope.lhsValue = (conversion.data.conversions[0].convertedUnit);
                 logConversion(converterScope.quantityName, converterScope.lhsValue, converterScope.lhsUnit.name, converterScope.lhsUnit.symbol,
-                    converterScope.rhsValue, converterScope.rhsUnit.name, converterScope.rhsUnit.symbol);
+                    converterScope.rhsValue, converterScope.rhsUnit.name, converterScope.rhsUnit.symbol, converterScope.date);
             });
         }
 
@@ -108,15 +121,22 @@
          * @param currencyRateDate the date of the currency rate used for the conversion
          */
         function logConversion(quantityName, sourceValue, sourceUnitName, sourceUnitSymbol, targetValue, targetUnitName, targetUnitSymbol, currencyRateDate) {
-            var date = moment().format('YYYY.MM.DD HH:mm:ss');
+            var date = moment().format("YYYY.MM.DD HH:mm:ss");
 
             var logMessage = date + " - " + quantityName + ": ";
             logMessage += sourceValue + " " + sourceUnitName + " [" + sourceUnitSymbol + "]";
             logMessage += " = ";
             logMessage += targetValue + " " + targetUnitName + " [" + targetUnitSymbol + "]";
-            logMessage += currencyRateDate ? " on " + currencyRateDate : "";
+            logMessage += currencyRateDate ? " on " + moment(currencyRateDate).format("YYYY.MM.DD") : "";
 
             vm.logMessages = vm.logMessages ? logMessage + "\n" + vm.logMessages : logMessage;
+        }
+
+        /**
+         * Formats the date in order for its currency to be convertible.
+         */
+        function formatDate(date) {
+            return date ? moment(date).format("YYYY-MM-DD") : null;
         }
     }
 })();

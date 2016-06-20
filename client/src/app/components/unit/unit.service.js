@@ -21,7 +21,8 @@
                 params: {
                     q: '@q',
                     source: '@source',
-                    target: '@target'
+                    target: '@target',
+                    date: '@date'
                 },
                 method: "GET"
             }
