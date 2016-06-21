@@ -1,4 +1,4 @@
 cron:
 - description: update currency rates
   url: /units/currencies/update
-  schedule: every 1 hours
+  schedule: every day 02:00
