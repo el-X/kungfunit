@@ -208,12 +208,398 @@
               "symbol": "acre"
             }
           ]
+        },
+        {
+          "name": "Volume",
+          "units": [
+            {
+              "name": "Cubic meter",
+              "symbol": "m3"
+            },
+            {
+              "name": "Liter",
+              "symbol": "l"
+            },
+            {
+              "name": "Cubic centimetre",
+              "symbol": "cc"
+            },
+            {
+              "name": "Cubic inch",
+              "symbol": "cuin"
+            },
+            {
+              "name": "Cubic foot",
+              "symbol": "cuft"
+            },
+            {
+              "name": "Cubic yard",
+              "symbol": "cuyd"
+            },
+            {
+              "name": "Teaspoon",
+              "symbol": "teaspoon"
+            },
+            {
+              "name": "Tablespoon",
+              "symbol": "tablespoon"
+            }
+          ]
+        },
+        {
+          "name": "Liquid volume",
+          "units": [
+            {
+              "name": "Minim",
+              "symbol": "min"
+            },
+            {
+              "name": "Fluid dram",
+              "symbol": "fldr"
+            },
+            {
+              "name": "Fluid ounce",
+              "symbol": "floz"
+            },
+            {
+              "name": "Gill",
+              "symbol": "gi"
+            },
+            {
+              "name": "Cup",
+              "symbol": "cp"
+            },
+            {
+              "name": "Pint",
+              "symbol": "pt"
+            },
+            {
+              "name": "Quart",
+              "symbol": "qt"
+            },
+            {
+              "name": "Gallon",
+              "symbol": "gal"
+            },
+            {
+              "name": "Beer barrel",
+              "symbol": "bbl"
+            },
+            {
+              "name": "Oil barrel",
+              "symbol": "obl"
+            },
+            {
+              "name": "Hogshead",
+              "symbol": "hogshead"
+            },
+            {
+              "name": "Drop",
+              "symbol": "gtt"
+            }
+          ]
+        },
+        {
+          "name": "Angle",
+          "units": [
+            {
+              "name": "Radian",
+              "symbol": "rad"
+            },
+            {
+              "name": "Degree",
+              "symbol": "deg"
+            },
+            {
+              "name": "Gradian",
+              "symbol": "grad"
+            },
+            {
+              "name": "Cycle",
+              "symbol": "cycle"
+            },
+            {
+              "name": "Second of arc",
+              "symbol": "arcsec"
+            },
+            {
+              "name": "Minute of arc",
+              "symbol": "arcmin"
+            }
+          ]
+        },
+        {
+          "name": "Frequency",
+          "units": [
+            {
+              "name": "Hertz",
+              "symbol": "Hz"
+            },
+            {
+              "name": "Kilohertz",
+              "symbol": "kHz"
+            },
+            {
+              "name": "Megahertz",
+              "symbol": "MHz"
+            },
+            {
+              "name": "Gigahertz",
+              "symbol": "GHz"
+            }
+          ]
+        },
+        {
+          "name": "Force",
+          "units": [
+            {
+              "name": "Newton",
+              "symbol": "N"
+            },
+            {
+              "name": "Dyne",
+              "symbol": "dyne"
+            },
+            {
+              "name": "Pound-force",
+              "symbol": "lbf"
+            },
+            {
+              "name": "Kip",
+              "symbol": "kip"
+            }
+          ]
+        },
+        {
+          "name": "Energy",
+          "units": [
+            {
+              "name": "Joule",
+              "symbol": "J"
+            },
+            {
+              "name": "Kilojoule",
+              "symbol": "kJ"
+            },
+            {
+              "name": "Erg",
+              "symbol": "erg"
+            },
+            {
+              "name": "Watt hour",
+              "symbol": "Wh"
+            },
+            {
+              "name": "Kilowatt hour",
+              "symbol": "kWh"
+            },
+            {
+              "name": "Brtish thermal unit",
+              "symbol": "BTU"
+            },
+            {
+              "name": "Electronvolt ",
+              "symbol": "eV"
+            }
+          ]
+        },
+        {
+          "name": "Power",
+          "units": [
+            {
+              "name": "Watt",
+              "symbol": "W"
+            },
+            {
+              "name": "Kilowatt",
+              "symbol": "kW"
+            },
+            {
+              "name": "Horsepower",
+              "symbol": "hp"
+            }
+          ]
+        },
+        {
+          "name": "Pressure",
+          "units": [
+            {
+              "name": "Pascal",
+              "symbol": "Pa"
+            },
+            {
+              "name": "Pound-force per square inch",
+              "symbol": "psi"
+            },
+            {
+              "name": "Atmosphere",
+              "symbol": "atm"
+            },
+            {
+              "name": "Torr",
+              "symbol": "torr"
+            },
+            {
+              "name": "Bar",
+              "symbol": "bar"
+            },
+            {
+              "name": "Millimeter of mercury",
+              "symbol": "mmHg"
+            },
+            {
+              "name": "Millimeter of water",
+              "symbol": "mmH2O"
+            },
+            {
+              "name": "Centimeter of water",
+              "symbol": "cmH2O"
+            }
+          ]
+        },
+        {
+          "name": "Electricity",
+          "units": [
+            {
+              "name": "Ampere",
+              "symbol": "A"
+            },
+            {
+              "name": "Coulomb",
+              "symbol": "C"
+            },
+            {
+              "name": "Watt",
+              "symbol": "W"
+            },
+            {
+              "name": "Volt",
+              "symbol": "volt "
+            },
+            {
+              "name": "Ohm",
+              "symbol": "ohm"
+            },
+            {
+              "name": "Farad",
+              "symbol": "F"
+            },
+            {
+              "name": "Weber",
+              "symbol": "Wb"
+            },
+            {
+              "name": "Tesla",
+              "symbol": "T"
+            },
+            {
+              "name": "Henry",
+              "symbol": "H"
+            },
+            {
+              "name": "Electronvolt ",
+              "symbol": "eV"
+            }
+          ]
         }
       ]
     },
     {
-      "name": "Misc",
+      "name": "Miscellaneous",
       "quantities": [
+        {
+          "name": "Binary",
+          "units": [
+            {
+              "name": "Bit",
+              "symbol": "b"
+            },
+            {
+              "name": "Kilobit",
+              "symbol": "kb"
+            },
+            {
+              "name": "Kibibit",
+              "symbol": "Kib"
+            },
+            {
+              "name": "Megabit",
+              "symbol": "Mb"
+            },
+            {
+              "name": "Mebibit",
+              "symbol": "Mib"
+            },
+            {
+              "name": "Gigabit",
+              "symbol": "Gb"
+            },
+            {
+              "name": "Gibibit",
+              "symbol": "Gib"
+            },
+            {
+              "name": "Terabit",
+              "symbol": "Tb"
+            },
+            {
+              "name": "Tebibit",
+              "symbol": "Tib"
+            },
+            {
+              "name": "Petabit",
+              "symbol": "Pb"
+            },
+            {
+              "name": "Pebibit",
+              "symbol": "Pib"
+            },
+            {
+              "name": "Byte",
+              "symbol": "B"
+            },
+            {
+              "name": "Kilobyte",
+              "symbol": "kB"
+            },
+            {
+              "name": "Kibibyte",
+              "symbol": "KiB"
+            },
+            {
+              "name": "Megabyte",
+              "symbol": "MB"
+            },
+            {
+              "name": "Mebibyte",
+              "symbol": "MiB"
+            },
+            {
+              "name": "Gigabyte",
+              "symbol": "GB"
+            },
+            {
+              "name": "Gibibyte",
+              "symbol": "GiB"
+            },
+            {
+              "name": "Terabyte",
+              "symbol": "TB"
+            },
+            {
+              "name": "Tebibyte",
+              "symbol": "TiB"
+            },
+            {
+              "name": "Petabyte",
+              "symbol": "PB"
+            },
+            {
+              "name": "Pebibyte",
+              "symbol": "PiB"
+            }
+          ]
+        },
         {
           "name": "Currency",
           "units": [

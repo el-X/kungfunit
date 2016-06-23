@@ -19,7 +19,7 @@
         vm.unitClasses = [];
         vm.unitQuantities = [];
         vm.unitQuantityNames = [];
-        vm.selectedUnitQuantities = ["Area", "Length", "Time", "Temperature", "Currency"];
+        vm.selectedUnitQuantities = ["Area", "Length", "Currency", "Volume", "Binary"];
         vm.searchTerm = "";
         vm.logMessages = "";
 

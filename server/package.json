@@ -4,6 +4,16 @@
   "version": "0.0.1",
   "private": true,
   "author": "Alexander Keller",
+  "apidoc": {
+    "name": "KungFunit",
+    "title": "KungFunit",
+    "url": "https://kungfunit.appspot.com",
+    "template": {
+      "forceLanguage": "en",
+      "withCompare": false,
+      "withGenerator": false
+    }
+  },
   "engines": {
     "node": "~4.2"
   },
