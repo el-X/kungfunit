@@ -1,17 +1,33 @@
-<md-toolbar layout="row" layout-fill md-whiteframe="1" class="md-primary md-hue-3">
+<md-toolbar md-whiteframe="1" class="md-primary md-hue-3">
     <div class="md-toolbar-tools">
-        <a href="#" layout="row" md-ink-ripple>
+        <a href="#" layout="row" md-ink-ripple flex="none">
             <img src="assets/images/kungfunit.png" alt="KungFunit Logo" style="width: 32px; height: 32px">&nbsp;&nbsp;
-            <div class="md-headline yin-yang-font" >
+            <div class="md-headline yin-yang-font">
                 <span class="yin-color">Kung</span><span class="yang-color">Funit</span>
             </div>
         </a>
         &nbsp;&nbsp;
-        <div layout="row" flex>
-            <md-button class="md-raised" ui-sref="datasets">Datasets</md-button>
-            <md-button class="md-raised" ui-sref="documentation">Documentation</md-button>
-            <md-button class="md-raised" ui-sref="about">About</md-button>
+        <div layout="row" flex hide-xs>
+            <md-button ui-sref="datasets">Datasets</md-button>
+            <md-button ui-sref="documentation">Documentation</md-button>
+            <md-button ui-sref="about">About</md-button>
         </div>
+        <md-menu layout="row" layout-align="end center" md-position-mode="target-right target" flex hide-gt-xs>
+            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open navigation menu">
+                <md-icon md-menu-origin>more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ui-sref="datasets">Datasets</md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ui-sref="documentation">Documentation</md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ui-sref="about">About</md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
         <!--<md-button class="md-raised" ui-sref="example">Example</md-button>-->
     </div>
 </md-toolbar>

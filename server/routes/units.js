@@ -88,7 +88,7 @@ router.get('/', function (req, res) {
  *         "convertedUnit": 1000
  *       }
  *     ]
- *    }
+ *   }
  * }
  */
 router.get('/convert', function (req, res) {
