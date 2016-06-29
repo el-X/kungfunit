@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var units = require('./routes/units');
+var unitUtils = require('./utils/unit-utils');
 
 var app = express();
 
@@ -21,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/units', units);
+
+unitUtils.initCurrencyRates();
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

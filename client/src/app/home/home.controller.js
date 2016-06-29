@@ -10,11 +10,8 @@
         var vm = this;
 
         vm.date = moment().toDate();
-        vm.minDate = new Date(
-            vm.date.getFullYear(),
-            vm.date.getMonth(),
-            vm.date.getDate() - 4);
-        vm.maxDate = new Date();
+        vm.minDate = moment().subtract(4, 'days').toDate(); // only five days should be selectable
+        vm.maxDate = moment().toDate();
 
         vm.unitClasses = [];
         vm.unitQuantities = [];
