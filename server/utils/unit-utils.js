@@ -2,11 +2,18 @@
 
 const CURRENCY_TIME_SPAN = 5;
 const DATE_FORMAT = "YYYY-MM-DD";
+const DATASTORE_KIND = "Rates";
 
+var async = require('async');
 var fx = require('money');
 var math = require('mathjs');
 var moment = require('moment');
 var request = require('request');
+
+var gcloud = require('gcloud');
+var datastore = gcloud.datastore({
+    projectId: process.env.GCLOUD_PROJECT
+});
 
 var unitUtils = {};
 var rates = {};
@@ -49,13 +56,29 @@ unitUtils.convertCurrency = function (value, source, target, date) {
  * Initializes the currency rates on startup.
  */
 unitUtils.initCurrencyRates = function () {
-    for (var i = 0; i < CURRENCY_TIME_SPAN; i++) {
-        var date = moment().subtract(i, 'days').format(DATE_FORMAT);
+    var count = 0;
 
-        requestCurrencyRates(date, function (error, response, body) {
-            initCurrencyRates(error, response, body, this.date);
-        }.bind({date: date}));  // needed or else the last date of the iteration would be used
-    }
+    async.whilst(
+        function () {
+            return count < CURRENCY_TIME_SPAN;
+        },
+        function (callback) {
+            var date = moment().subtract(count, 'days').format(DATE_FORMAT);
+
+            loadFromDatastore(date, function (err, result) {
+                if (result) {
+                    rates[date] = result.data;
+                } else {
+                    requestCurrencyRates(date, function (error, response, body) {
+                        initCurrencyRates(error, response, body, date);
+                    });
+                }
+            });
+
+            count++;
+            callback(null, count);
+        }
+    );
 }
 
 /**
@@ -78,6 +101,8 @@ function initCurrencyRates(error, response, body, date) {
     if (!error && response.statusCode == 200) {
         var newRates = JSON.parse(body).rates;
         rates[date] = newRates;
+
+        saveToDatastore(date, newRates);
     }
 }
 
@@ -113,5 +138,34 @@ function requestCurrencyRates(date, callback) {
 
     request(url, callback);
 }
+
+function saveToDatastore(date, rates) {
+    var ratesKey = datastore.key([DATASTORE_KIND, date]);
+
+    datastore.upsert({
+        key: ratesKey,
+        data: rates
+    }, function (err) {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
+unitUtils.loadFromDatastore = function () {
+    var date = "2016-06-30";
+
+    var callback = function (err, rates) {
+        console.log(rates);
+    };
+
+    loadFromDatastore(date, callback);
+}
+
+function loadFromDatastore(date, callback) {
+    var ratesKey = datastore.key([DATASTORE_KIND, date]);
+    datastore.get(ratesKey, callback);
+}
+
 
 module.exports = unitUtils;
