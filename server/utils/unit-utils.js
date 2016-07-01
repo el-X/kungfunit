@@ -1,16 +1,19 @@
 'use strict';
 
-const CURRENCY_TIME_SPAN = 5;
+const CURRENCY_RATE_TIME_SPAN = 5;
 const DATE_FORMAT = "YYYY-MM-DD";
 const DATASTORE_KIND = "Rates";
 
 var async = require('async');
+var config = require('../config');
 var fx = require('money');
 var math = require('mathjs');
 var moment = require('moment');
 var request = require('request');
 
 var gcloud = require('gcloud');
+
+process.env.GCLOUD_PROJECT = process.env.GCLOUD_PROJECT ? process.env.GCLOUD_PROJECT : config['GCLOUD_PROJECT'];
 var datastore = gcloud.datastore({
     projectId: process.env.GCLOUD_PROJECT
 });
@@ -53,34 +56,53 @@ unitUtils.convertCurrency = function (value, source, target, date) {
 }
 
 /**
- * Initializes the currency rates on startup.
+ * Initializes the currency rates on startup for the given currency rate time span.
  */
 unitUtils.initCurrencyRates = function () {
     var count = 0;
 
     async.whilst(
         function () {
-            return count < CURRENCY_TIME_SPAN;
+            return count < CURRENCY_RATE_TIME_SPAN;
         },
-        function (callback) {
-            var date = moment().subtract(count, 'days').format(DATE_FORMAT);
-
-            loadFromDatastore(date, function (err, result) {
-                if (result) {
-                    rates[date] = result.data;
-                } else {
-                    requestCurrencyRates(date, function (error, response, body) {
-                        initCurrencyRates(error, response, body, date);
-                    });
-                }
-            });
-
+        function (loopCallback) {
+            initCurrencyRates(count, loopCallback);
             count++;
-            callback(null, count);
+        },
+        function (err) {        // called when the initialization finished
+            deleteIrrelevantRates();
         }
     );
 }
 
+function initCurrencyRates(count, loopCallback) {
+    var date = moment().subtract(count, 'days').format(DATE_FORMAT);
+
+    loadFromDatastore(date, function (err, result) {
+        persistLocally(date, result, loopCallback)
+    });
+}
+
+function persistLocally(date, result, loopCallback) {
+    if (result) {
+        rates[date] = result.data;
+        loopCallback(null);
+    } else {
+        requestCurrencyRates(date, function (error, response, body) {
+            loadCurrencyRates(error, response, body, date);
+            loopCallback(null);
+        });
+    }
+}
+
+function deleteIrrelevantRates() {
+    // var key1 = datastore.key([DATASTORE_KIND, "2016-06-30"]);
+    // var key2 = datastore.key([DATASTORE_KIND, "2016-06-29"]);
+    //
+    // datastore.delete([key1, key2]);
+
+    console.log(Object.keys(rates));
+}
 /**
  * Updates the currency rates by throwing away the oldest entries and replacing it with the latest.
  */
@@ -97,7 +119,7 @@ unitUtils.updateCurrencyRates = function () {
  * @param body the body containing the rates for a certain date
  * @param date the date for which the dates were requested
  */
-function initCurrencyRates(error, response, body, date) {
+function loadCurrencyRates(error, response, body, date) {
     if (!error && response.statusCode == 200) {
         var newRates = JSON.parse(body).rates;
         rates[date] = newRates;
@@ -117,11 +139,13 @@ function updateCurrencyRates(error, response, body) {
     if (!error && response.statusCode == 200) {
         var newRates = JSON.parse(body).rates;
 
-        var historicalDate = moment().subtract(CURRENCY_TIME_SPAN, 'days').format(DATE_FORMAT);
+        var historicalDate = moment().subtract(CURRENCY_RATE_TIME_SPAN, 'days').format(DATE_FORMAT);
         var currentDate = moment().format(DATE_FORMAT);
 
         delete rates[historicalDate];
         rates[currentDate] = newRates;
+
+        saveToDatastore(currentDate, newRates);
     }
 }
 

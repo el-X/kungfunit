@@ -7,8 +7,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var config = require('./config');
-process.env.GCLOUD_PROJECT = process.env.GCLOUD_PROJECT ? process.env.GCLOUD_PROJECT : config['GCLOUD_PROJECT'];
 var routes = require('./routes/index');
 var units = require('./routes/units');
 var unitUtils = require('./utils/unit-utils');
