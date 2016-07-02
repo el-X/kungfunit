@@ -24,7 +24,6 @@ app.use('/', routes);
 app.use('/units', units);
 
 unitUtils.initCurrencyRates();
-// unitUtils.loadFromDatastore();
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

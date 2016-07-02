@@ -1,4 +1,3 @@
 {
-  "GCLOUD_PROJECT": "kung-funit",
-  "USE_DATASTORE": true
+  "GCLOUD_PROJECT": "kung-funit"
 }
