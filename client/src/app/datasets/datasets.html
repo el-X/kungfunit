@@ -6,7 +6,7 @@
             <md-select ng-model="selectedQuantity">
                 <!-- select the first quantity -->
                 <md-optgroup ng-repeat="class in vm.unitClasses" label="{{class.name}}">
-                    <md-option ng-repeat="quantity in class.quantities" ng-value="quantity.units">
+                    <md-option ng-repeat="quantity in class.quantities" ng-value="quantity.units" ng-selected="$first">
                         {{quantity.name}}
                     </md-option>
                 </md-optgroup>
@@ -15,7 +15,7 @@
         <!-- Source unit selector -->
         <md-input-container class="md-subhead unit-selector" flex-offset="10" flex="15">
             <label>Source unit</label>
-            <md-select ng-model="selectedSourceUnit" ng-disabled="!selectedQuantity" ng-change="changed = true">
+            <md-select ng-model="vm.selectedSourceUnit" ng-disabled="!selectedQuantity" ng-change="changed = true">
                 <!-- select the first unit -->
                 <md-option ng-repeat="unit in selectedQuantity" ng-value="unit.symbol" ng-selected="$first">
                     {{unit.name}}
@@ -25,7 +25,7 @@
         <!-- Target unit selector -->
         <md-input-container class="md-subhead unit-selector" flex-offset="10" flex="15">
             <label>Target unit</label>
-            <md-select ng-model="selectedTargetUnit" ng-disabled="!selectedQuantity" ng-change="changed = true">
+            <md-select ng-model="vm.selectedTargetUnit" ng-disabled="!selectedQuantity" ng-change="changed = true">
                 <!-- select the second unit -->
                 <md-option ng-repeat="unit in selectedQuantity" ng-value="unit.symbol" ng-selected="$index == 1">
                     {{unit.name}}
@@ -36,11 +36,14 @@
 </md-toolbar>
 <div layout="row" layout-align="center stretch">
     <md-input-container class="md-block dataset-input-container" flex="50">
-        <textarea class="dataset-input-source" rows="32" ng-model="vm.sourceDataset" ng-change="changed = true"
+        <textarea class="dataset-input-source" rows="32" name="test" ng-model="vm.sourceDataset" ng-change="changed = true"
                   placeholder="Place your comma-separated list of values here."
                   aria-label="Source Dataset"
                   md-no-autogrow>
-              </textarea>
+        </textarea>
+        <div ng-messages="test.$error" multiple>
+            <div ng-message="pattern">This is required!</div>
+        </div>
     </md-input-container>
     <md-button class="md-fab convert-button" ng-click="vm.convertDataset(); changed = false;"
                ng-disabled="!(!(!vm.sourceDataset || vm.sourceDataset.length === 0) && selectedQuantity && changed)">
@@ -50,6 +53,6 @@
     <md-input-container class="md-block dataset-input-container" flex="50">
         <textarea class="dataset-input-target" rows="32" ng-model="vm.targetDataset" aria-label="Target Dataset"
                   md-no-autogrow readonly>
-              </textarea>
+        </textarea>
     </md-input-container>
 </div>

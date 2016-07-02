@@ -8,7 +8,8 @@
         .factory('unitService', unitService);
 
     /*
-     * This service factory provides information for unitClasses and unit conversions.
+     * This service factory represents the interface to the REST-API.
+     * It provides functions for retrieving unit information and converting units.
      */
     /** @ngInject */
     function unitService($resource) {
@@ -24,7 +25,7 @@
                     target: '@target',
                     date: '@date'
                 },
-                method: "GET"
+                method: 'GET'
             }
         });
 

@@ -26,33 +26,46 @@ var rates = {};
 fx.base = "EUR";    // the base currency
 
 /**
- * Converts a certain value from a source to a specific target unit.
+ * Converts the given values from a source to a specific target unit.
  * Only units other than currencies are allowed.
  *
- * @param value the value to be converted
+ * @param values the values to be converted
  * @param source the values source unit
  * @param target the values target unit
  * @returns {number} the value for the desired target unit
  */
-unitUtils.convertUnit = function (value, source, target) {
-    return math.unit(value, source).toNumber(target);
+unitUtils.convertUnit = function (values, source, target) {
+    var conversions = [];
+
+    lodash.each(values, function (value) {
+        var conversion = math.unit(value, source).toNumber(target);
+        conversions.push({"convertedUnit": conversion});
+    });
+
+    return conversions;
 }
 
 /**
- * Converts a certain currency value from a source to a specific target currency.
+ * Converts the provided currency values from a source to a specific target currency.
  * Only currencies are supported.
  *
- * @param value the currency value to be converted
+ * @param values the currency values to be converted
  * @param source the values source currency
  * @param target the values target currency
  * @param date the date indication for the currency rate
- * @returns {number} the currency value for the desired target currency
+ * @returns {array} an array containing the currency values for the desired target currency
  */
-unitUtils.convertCurrency = function (value, source, target, date) {
+unitUtils.convertCurrency = function (values, source, target, date) {
+    var conversions = [];
     fx.rates = rates[date];
-    var conversion = fx(value).from(source).to(target);
 
-    return math.round(conversion, 2);
+    lodash.each(values, function (value) {
+        var conversion = fx(value).from(source).to(target);
+        conversion = math.round(conversion, 2);
+        conversions.push({"convertedUnit": conversion});
+    });
+
+    return conversions;
 }
 
 /**

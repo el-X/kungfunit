@@ -6,9 +6,11 @@
         .controller('DatasetsController', DatasetsController);
 
     /** @ngInject */
-    function DatasetsController(unitService) {
+    function DatasetsController(unitService, lodash) {
         var vm = this;
         vm.unitClasses = [];
+        vm.selectedSourceUnit = "";
+        vm.selectedTargetUnit = "";
         vm.sourceDataset = "";
         vm.targetDataset = "";
 
@@ -26,7 +28,22 @@
         }
 
         function convertDataset() {
-            vm.targetDataset = vm.sourceDataset;
+            var separator = ",";
+            var trimmer = separator + " ";
+
+            var values = lodash.trim(vm.sourceDataset, trimmer);
+            values = lodash.split(values, separator);
+
+            unitService.convert({
+                q: values,
+                source: vm.selectedSourceUnit,
+                target: vm.selectedTargetUnit,
+                date: undefined
+            }, function (conversions) {
+                var filteredConversions = lodash.map(conversions.data.conversions, 'convertedUnit');
+                console.log(filteredConversions);
+                vm.targetDataset = lodash.join(filteredConversions, trimmer);
+            });
         }
     }
 })();

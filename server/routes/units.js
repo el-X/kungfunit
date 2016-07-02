@@ -60,15 +60,16 @@ router.get('/', function (req, res) {
 });
 
 /**
- * @api {get} /units/convert Convert a specific unit
- * @apiDescription Returns the conversion for a certain unit.
+ * @api {get} /units/convert Converts a list of units
+ * @apiDescription Returns the conversions for a certain unit.
  * @apiExample Example usage:
  *      https://kungfunit.appspot.com/units/convert?q=1&source=km&target=m
+ *      https://kungfunit.appspot.com/units/convert?q=1&q=2&q=3&source=kg&target=g
  *      https://kungfunit.appspot.com/units/convert?q=1&source=USD&target=EUR&date=2016-06-22
  * @apiName GetConversion
  * @apiGroup Units
  *
- * @apiParam {Number} q The value that should be converted
+ * @apiParam {Number} q The values that should be converted
  * @apiParam {String} source The symbolic representation of the source values unit
  * @apiParam {String} target The symbolic representation of the unit to converted to
  * @apiParam {String} date The date of the conversion rate that should be used.
@@ -83,34 +84,36 @@ router.get('/', function (req, res) {
  *     "conversions": [
  *       {
  *         "convertedUnit": 1000
- *       }
+ *       },
+ *       {
+ *         "convertedUnit": 2000
+ *       }, ...
  *     ]
  *   }
  * }
  */
 router.get('/convert', function (req, res) {
-    var value = req.query.q;
+    var values = req.query.q;
     var source = req.query.source;
     var target = req.query.target;
     var date = req.query.date;
-    var result;
+    var conversions;
 
     if (date) {
-        result = unitUtils.convertCurrency(value, source, target, date);
+        conversions = unitUtils.convertCurrency(values, source, target, date);
     } else {
-        result = unitUtils.convertUnit(value, source, target);
+        conversions = unitUtils.convertUnit(values, source, target);
     }
 
     var response = {
         "data": {
-            "conversions": [
-                {"convertedUnit": result}
-            ]
+            "conversions": conversions
         }
     };
 
     res.json(response);
-});
+})
+;
 
 /**
  * Update the currency rates. This function is called in regular intervals by a corresponding cron job.
