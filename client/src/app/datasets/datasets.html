@@ -32,6 +32,16 @@
                 </md-option>
             </md-select>
         </md-input-container>
+        <!-- Datepicker -->
+            <!--ng-if="selectedQuantity == 'Currency'"-->
+        <md-datepicker ng-model="vm.date"
+                       ng-change="changed = true"
+                       md-min-date="vm.minDate" md-max-date="vm.maxDate"
+                       md-open-on-focus
+                       flex-offset="10"
+                       flex="15"
+                       style="background-color: #fafafa;">
+        </md-datepicker>
     </div>
 </md-toolbar>
 <div layout="row" layout-align="center stretch">

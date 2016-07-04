@@ -8,6 +8,10 @@
     /** @ngInject */
     function DatasetsController(unitService, lodash) {
         var vm = this;
+
+        vm.date = moment().toDate();
+        vm.minDate = moment().subtract(4, 'days').toDate(); // only five days should be selectable
+        vm.maxDate = moment().toDate();
         vm.unitClasses = [];
         vm.selectedSourceUnit = "";
         vm.selectedTargetUnit = "";
@@ -33,6 +37,8 @@
 
             var values = lodash.trim(vm.sourceDataset, trimmer);
             values = lodash.split(values, separator);
+
+            console.log(values);
 
             unitService.convert({
                 q: values,

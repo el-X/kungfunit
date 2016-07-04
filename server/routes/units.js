@@ -93,11 +93,11 @@ router.get('/', function (req, res) {
  * }
  */
 router.get('/convert', function (req, res) {
-    var values = req.query.q;
+    var values = Array.isArray(req.query.q) ? req.query.q : [req.query.q];
     var source = req.query.source;
     var target = req.query.target;
     var date = req.query.date;
-    var conversions;
+    var conversions = [];
 
     if (date) {
         conversions = unitUtils.convertCurrency(values, source, target, date);
