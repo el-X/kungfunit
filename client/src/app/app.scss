@@ -98,5 +98,16 @@ input[type=number] {
   -moz-appearance: textfield !important;
 }
 
+// Unselectable item
+.unselectable-item {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  cursor: default;
+  user-select: none;
+}
+
 // injector
 // endinjector

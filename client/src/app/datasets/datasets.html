@@ -3,10 +3,10 @@
         <!-- Quantity selector -->
         <md-input-container class="unit-selector" flex="20">
             <label>Quantity</label>
-            <md-select ng-model="selectedQuantity">
+            <md-select ng-model="vm.selectedQuantity">
                 <!-- select the first quantity -->
                 <md-optgroup ng-repeat="class in vm.unitClasses" label="{{class.name}}">
-                    <md-option ng-repeat="quantity in class.quantities" ng-value="quantity.units" ng-selected="$first">
+                    <md-option ng-repeat="quantity in class.quantities" ng-value="quantity" ng-selected="$index == 1">
                         {{quantity.name}}
                     </md-option>
                 </md-optgroup>
@@ -15,9 +15,9 @@
         <!-- Source unit selector -->
         <md-input-container class="md-subhead unit-selector" flex-offset="10" flex="15">
             <label>Source unit</label>
-            <md-select ng-model="vm.selectedSourceUnit" ng-disabled="!selectedQuantity" ng-change="changed = true">
+            <md-select ng-model="vm.selectedSourceUnit" ng-disabled="!vm.selectedQuantity" ng-change="changed = true">
                 <!-- select the first unit -->
-                <md-option ng-repeat="unit in selectedQuantity" ng-value="unit.symbol" ng-selected="$first">
+                <md-option ng-repeat="unit in vm.selectedQuantity.units" ng-value="unit.symbol" ng-selected="$first">
                     {{unit.name}}
                 </md-option>
             </md-select>
@@ -25,28 +25,32 @@
         <!-- Target unit selector -->
         <md-input-container class="md-subhead unit-selector" flex-offset="10" flex="15">
             <label>Target unit</label>
-            <md-select ng-model="vm.selectedTargetUnit" ng-disabled="!selectedQuantity" ng-change="changed = true">
+            <md-select ng-model="vm.selectedTargetUnit" ng-disabled="!vm.selectedQuantity" ng-change="changed = true">
                 <!-- select the second unit -->
-                <md-option ng-repeat="unit in selectedQuantity" ng-value="unit.symbol" ng-selected="$index == 1">
+                <md-option ng-repeat="unit in vm.selectedQuantity.units" ng-value="unit.symbol" ng-selected="$index == 1">
                     {{unit.name}}
                 </md-option>
             </md-select>
         </md-input-container>
         <!-- Datepicker -->
-            <!--ng-if="selectedQuantity == 'Currency'"-->
-        <md-datepicker ng-model="vm.date"
-                       ng-change="changed = true"
-                       md-min-date="vm.minDate" md-max-date="vm.maxDate"
-                       md-open-on-focus
-                       flex-offset="10"
-                       flex="15"
-                       style="background-color: #fafafa;">
-        </md-datepicker>
+        <div layout="column" layout-align="center end" flex-offset="10" flex="20">
+            <div ng-show="vm.selectedQuantity.name == 'Currency'">
+                <div class="dataset-datepicker-label unselectable-item">Currency rate date</div>
+                <md-datepicker class="dataset-datepicker" ng-model="vm.date"
+                               ng-change="changed = true"
+                               md-min-date="vm.minDate"
+                               md-max-date="vm.maxDate"
+                               md-open-on-focus
+                               required>
+                </md-datepicker>
+            </div>
+        </div>
     </div>
 </md-toolbar>
 <div layout="row" layout-align="center stretch">
     <md-input-container class="md-block dataset-input-container" flex="50">
-        <textarea class="dataset-input-source" rows="32" name="test" ng-model="vm.sourceDataset" ng-change="changed = true"
+        <textarea class="dataset-input-source" rows="32" name="test" ng-model="vm.sourceDataset"
+                  ng-change="changed = true"
                   placeholder="Place your comma-separated list of values here."
                   aria-label="Source Dataset"
                   md-no-autogrow>
@@ -55,8 +59,10 @@
             <div ng-message="pattern">This is required!</div>
         </div>
     </md-input-container>
-    <md-button class="md-fab convert-button" ng-click="vm.convertDataset(); changed = false;"
-               ng-disabled="!(!(!vm.sourceDataset || vm.sourceDataset.length === 0) && selectedQuantity && changed)">
+    <md-button class="md-fab convert-button"
+               ng-class="vm.invalid ? 'convert-button-invalid' : 'convert-button-valid'"
+               ng-click="vm.convertDataset(); changed = false;"
+               ng-disabled="!(!(!vm.sourceDataset || vm.sourceDataset.length === 0) && vm.selectedQuantity && changed)">
         <md-tooltip md-direction="left">CONVERT</md-tooltip>
         <md-icon>play_arrow</md-icon>
     </md-button>

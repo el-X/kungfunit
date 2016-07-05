@@ -16,7 +16,8 @@
                                    ng-change="vm.convertFromLeftToRight($parent)"
                                    ng-init="$parent.date = vm.date;"
                                    md-min-date="vm.minDate" md-max-date="vm.maxDate"
-                                   md-open-on-focus>
+                                   md-open-on-focus
+                                   required>
                     </md-datepicker>
                     <md-button class="md-icon-button converter-close-icon" ng-click="vm.toggleConverter(quantityName)"
                                aria-label="Close converter">

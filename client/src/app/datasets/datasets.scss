@@ -21,16 +21,40 @@
   border-width: 0 !important;
 }
 
+// Datepicker
+.dataset-datepicker-label {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 13px;
+  margin-top: 2px;
+  margin-left: 14px;
+}
+
+.dataset-datepicker {
+  background-color: #fafafa;
+
+  .md-datepicker-triangle-button {
+    top: 6px;
+  }
+}
+
 // Convert button
 .convert-button {
-  &:disabled {
-    background-color: #e0e0e0 !important;
-  }
-
   position: absolute;
   margin: auto;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.convert-button-valid {
+  &:disabled {
+    background-color: #e0e0e0 !important;
+  }
+}
+
+.convert-button-invalid {
+  &:disabled {
+    background-color: #e57373 !important;
+  }
 }
