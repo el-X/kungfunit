@@ -6,11 +6,11 @@
         .controller('HomeController', HomeController);
 
     /** @ngInject */
-    function HomeController(unitService, lodash, moment) {
+    function HomeController(unitService, lodash, moment, CURRENCY_RATE_TIME_SPAN) {
         var vm = this;
 
         vm.date = moment().toDate();
-        vm.minDate = moment().subtract(4, 'days').toDate(); // only five days should be selectable
+        vm.minDate = moment().subtract(CURRENCY_RATE_TIME_SPAN - 1, 'days').toDate(); // only five days should be selectable
         vm.maxDate = moment().toDate();
 
         vm.unitClasses = [];

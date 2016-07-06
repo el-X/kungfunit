@@ -3,6 +3,7 @@
 
 // Colors
 $background-color: #fafafa;
+$transparent-white: rgba(255, 255, 255, 0.87);
 $yin-color: #37474f;
 $yang-color: #90a4ae;
 
@@ -60,7 +61,7 @@ body {
 }
 
 md-content {
-  background-color: $background-color;
+  background-color: $background-color !important;
 }
 
 md-input-container textarea[md-no-autogrow].md-input {
@@ -78,6 +79,10 @@ md-input-container textarea[md-no-autogrow].md-input {
 
 .yang-color {
   color: $yang-color;
+}
+
+.background-color {
+  background-color: $background-color !important;
 }
 
 .browsehappy {
