@@ -19,7 +19,7 @@
                                    md-open-on-focus
                                    required>
                     </md-datepicker>
-                    <md-button class="md-icon-button converter-close-icon" ng-click="vm.toggleConverter(quantityName)"
+                    <md-button class="md-icon-button converter-close-icon" ng-click="vm.toggleConverterSelection(quantityName)"
                                aria-label="Close converter">
                         <md-icon>close</md-icon>
                     </md-button>
@@ -42,7 +42,7 @@
                             </md-select>
                         </md-input-container>
                     </div>
-                    <h2 flex="10" class="md-headline" style="text-align: center">=</h2>
+                    <h2 flex="10" class="md-headline converter-equals-sign">=</h2>
                     <div layout="column" flex="45">
                         <md-input-container md-no-float>
                             <input ng-model="rhsValue" ng-change="vm.convertFromRightToLeft(this)"
@@ -72,8 +72,8 @@
                     </md-card-header-text>
                 </md-card-header>
                 <md-card-content>
-                    <md-input-container class="md-block" style="margin: 8px 0;">
-                        <textarea ng-model="vm.logMessages" class="logger" rows="6"
+                    <md-input-container class="md-block logger-input-container">
+                        <textarea ng-model="vm.logMessages" class="logger-textarea" rows="6"
                                   readonly md-no-autogrow aria-label="Logger">
                         </textarea>
                     </md-input-container>
@@ -99,12 +99,12 @@
                               class="converter-filter-grid-margin">
                     <md-grid-tile ng-repeat="quantity in class.quantities | orderBy:'name' | filter:searchTerm"
                                   ng-init="quantityName = quantity.name">
-                        <md-button md-whiteframe="2" ng-click="vm.toggleConverter(quantityName)"
+                        <md-button md-whiteframe="2" ng-click="vm.toggleConverterSelection(quantityName)"
                                    class="converter-filter-button" layout-fill>
                             <span class="md-subhead" md-highlight-text="searchTerm.name" md-highlight-flags="i">{{quantityName}}</span>
                         </md-button>
                         <md-button class="md-fab md-mini converter-filter-check-button"
-                                   ng-click="vm.toggleConverter(quantityName)"
+                                   ng-click="vm.toggleConverterSelection(quantityName)"
                                    ng-show="vm.isUnitQuantitySelected(quantityName)">
                             <md-icon>check</md-icon>
                         </md-button>

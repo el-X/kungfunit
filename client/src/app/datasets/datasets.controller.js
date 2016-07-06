@@ -8,14 +8,14 @@
     /**
      * Controller for handling the validation and conversion of datasets.
      *
-     * @param DATE_FORMAT the date format used for determining the currency rates
+     * @param CURRENCY_DATE_FORMAT the date format used for determining the currency rates
      * @param CURRENCY_RATE_TIME_SPAN the desired time span for the currency rates
      * @param lodash utility for working with arrays, numbers, objects, strings, etc.
      * @param moment date library for parsing, validating, manipulating, and formatting dates
      * @param unitService offers backend services for retrieving unit information and converting units
      * @ngInject
      */
-    function DatasetsController(DATE_FORMAT, CURRENCY_RATE_TIME_SPAN, lodash, moment, unitService) {
+    function DatasetsController(CURRENCY_DATE_FORMAT, CURRENCY_RATE_TIME_SPAN, lodash, moment, unitService) {
         var vm = this;
 
         vm.date = moment().toDate();
@@ -84,7 +84,7 @@
                 q: values,
                 source: vm.selectedSourceUnit,
                 target: vm.selectedTargetUnit,
-                date: formatDate(vm.date)
+                date: formatDateForCurrencyConversion(vm.date)
             }, function (result) {
                 var conversionsArray = lodash.map(result.data.conversions, 'convertedUnit');
                 vm.targetDataset = lodash.join(conversionsArray, ", ");
@@ -93,9 +93,12 @@
 
         /**
          * Formats the date in order for its currency to be convertible. If no date is specified "null" is returned.
+         *
+         * @param date the date which should be formatted for the currency conversion
+         * @returns {string} the formatted date in case its meant for the currency conversion; null otherwise
          */
-        function formatDate(date) {
-            return vm.selectedQuantity.name == 'Currency' ? moment(date).format(DATE_FORMAT) : null;
+        function formatDateForCurrencyConversion(date) {
+            return vm.selectedQuantity.name == 'Currency' ? moment(date).format(CURRENCY_DATE_FORMAT) : null;
         }
 
         /**

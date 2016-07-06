@@ -17,7 +17,9 @@
                 }
             },
             resolve: {
-                $title: function() { return 'Home'; }   // the page title
+                $title: function () {
+                    return 'Home';          // the page title
+                }
             }
         });
     }

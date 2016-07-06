@@ -1,4 +1,7 @@
-// Converters
+/**
+ * Converters
+ */
+
 .converter-grid-margin {
   margin: 8px 0 8px 8px;
 }
@@ -14,25 +17,39 @@
   right: -8px;
 }
 
+.converter-equals-sign {
+  text-align: center;
+}
+
 .converter-date-input {
   top: -6px !important;
 
   .md-datepicker-input-container {
-       margin: 0;
+    margin: 0;
   }
 }
 
-// Logger
-.logger {
+/**
+ * Logger
+ */
+
+.logger-input-container {
+  margin: 8px 0;
+}
+
+.logger-textarea {
   border-width: 1px 0 0 !important;
 }
 
 .converter-filter-subheader {
-  text-transform: uppercase;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
-// Converter filter
+/**
+ * Converter filter
+ */
+
 .converter-filter-grid-margin {
   margin: 8px 0;
 }
@@ -42,15 +59,15 @@
 }
 
 .converter-filter-check-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
   width: 24px !important;
   height: 24px !important;
   min-height: 24px !important;
   line-height: 24px !important;
   padding: 0;
   margin: 0;
-  position: absolute;
-  right: -10px;
-  top: -10px;
 }
 
 .highlight {
