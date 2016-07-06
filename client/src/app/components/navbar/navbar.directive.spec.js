@@ -2,22 +2,18 @@
     'use strict';
 
     describe('directive navbar', function () {
-        var el;
-        var timeInMs;
+        var element;
 
         beforeEach(module('kungfunit'));
         beforeEach(inject(function ($compile, $rootScope) {
-            timeInMs = new Date();
-            timeInMs = timeInMs.setHours(timeInMs.getHours() - 24);
+            element = angular.element('<navbar></navbar>');
 
-            el = angular.element('<navbar></navbar>');
-
-            $compile(el)($rootScope.$new());
+            $compile(element)($rootScope.$new());
             $rootScope.$digest();
         }));
 
         it('should be compiled', function () {
-            expect(el.html()).not.toEqual(null);
+            expect(element.html()).not.toEqual(null);
         });
 
     });

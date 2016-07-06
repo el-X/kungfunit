@@ -5,21 +5,17 @@
         .module('kungfunit')
         .directive('navbar', navbar);
 
-    /** @ngInject */
+    /**
+     * The navigation bar is implemented as a directive, which makes testing and reusing it much easier.
+     *
+     * @ngInject
+     */
     function navbar() {
         var directive = {
             restrict: 'E',
-            templateUrl: 'app/components/navbar/navbar.html',
-            controller: NavbarController,
-            controllerAs: 'vm',
-            bindToController: true
+            templateUrl: 'app/components/navbar/navbar.html'
         };
 
         return directive;
-
-        /** @ngInject */
-        function NavbarController() {
-        }
     }
-
 })();

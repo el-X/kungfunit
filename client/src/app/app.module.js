@@ -5,7 +5,6 @@
         'kungfunit.about',
         'kungfunit.datasets',
         'kungfunit.documentation',
-        'kungfunit.example',
         'kungfunit.home',
         'ngAnimate',
         'ngMaterial',

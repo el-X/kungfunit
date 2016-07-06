@@ -1,19 +1,21 @@
-<md-toolbar md-whiteframe="1" class="md-primary md-hue-3">
+<!-- A toolbar is used for the navigation bar since Angular Material does currently not offer a navbar-directive -->
+<md-toolbar class="md-primary md-hue-3" md-whiteframe="1">
     <div class="md-toolbar-tools">
-        <a href="#" layout="row" md-ink-ripple flex="none">
-            <img src="assets/images/kungfunit.png" alt="KungFunit Logo" style="width: 32px; height: 32px">&nbsp;&nbsp;
+        <!-- the logo and the corresponding lettering -->
+        <a href="#" layout="row" flex="none" md-ink-ripple>
+            <img src="assets/images/kungfunit.png" alt="KungFunit Logo" width="32" height="32">&nbsp;&nbsp;
             <div class="md-headline yin-yang-font">
                 <span class="yin-color">Kung</span><span class="yang-color">Funit</span>
             </div>
         </a>
         &nbsp;&nbsp;
-        <!-- the normal navbar representation with buttons -->
+        <!-- the normal version of the navigation bar with buttons -->
         <div layout="row" flex hide-xs>
             <md-button ui-sref="datasets">Datasets</md-button>
             <md-button ui-sref="documentation">Documentation</md-button>
             <md-button ui-sref="about">About</md-button>
         </div>
-        <!-- the mobile navbar representation with a menu -->
+        <!-- the mobile-friendly version of the navigation bar with a menu -->
         <md-menu layout="row" layout-align="end center" md-position-mode="target-right target" flex hide-gt-xs>
             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open navigation menu">
                 <md-icon md-menu-origin>menu</md-icon>
@@ -30,6 +32,5 @@
                 </md-menu-item>
             </md-menu-content>
         </md-menu>
-        <!--<md-button class="md-raised" ui-sref="example">Example</md-button>-->
     </div>
 </md-toolbar>
