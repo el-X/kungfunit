@@ -15,7 +15,9 @@
                 }
             },
             resolve: {
-                $title: function() { return 'About'; }   // the page title
+                $title: function () {
+                    return 'About';     // the page title
+                }
             }
         });
     }
