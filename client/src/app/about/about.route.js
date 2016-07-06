@@ -11,8 +11,6 @@
             url: '/about',
             views: {
                 "content": {
-                    controller: 'AboutController',
-                    controllerAs: 'vm',         // access the controller by using 'vm' as variable
                     templateUrl: 'app/about/about.html'
                 }
             },
