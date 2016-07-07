@@ -17,7 +17,7 @@ wrench.readdirSyncRecursive('./gulp').filter(function (file) {
 });
 
 /**
- *  Teh default task cleans temporary directories and launches the main optimization build task.
+ *  The default task cleans temporary directories and launches the main optimization build task.
  */
 gulp.task('default', ['clean'], function () {
     gulp.start('build');

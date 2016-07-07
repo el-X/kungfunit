@@ -1,7 +1,7 @@
 /**
- *  This file contains the variables used in other gulp files which defines tasks.
+ *  This file contains the variables used in other gulp files.
  *  By design, only very generic config values are put here which are used in several places to keep good readability
- *  of the tasks.
+ *  of said tasks.
  */
 
 var gutil = require('gulp-util');
@@ -18,8 +18,8 @@ exports.paths = {
 
 /**
  *  Wiredep is the lib which injects bower dependencies in the project.
- *  It is mainly used to inject script tags in the index.html but also used to inject css preprocessor dependencies and
- *  js files in karma.
+ *  It is mainly used to inject script tags in the index.html but is also used to inject css preprocessor dependencies
+ *  and js files in karma.
  */
 exports.wiredep = {
     directory: 'bower_components'

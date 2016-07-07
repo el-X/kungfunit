@@ -1,6 +1,8 @@
 'use strict';
 
-// An example configuration file.
+/**
+ * The configuration file for the end-to-end protractor tests.
+ */
 exports.config = {
     // The address of a running selenium server.
     // seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -13,8 +15,7 @@ exports.config = {
 
     baseUrl: 'http://localhost:3000',
 
-    // Spec patterns are relative to the current working directory when
-    // protractor is called.
+    // Spec patterns are relative to the current working directory when protractor is called.
     specs: ['e2e/**/*.js'],
 
     // Options to be passed to Jasmine-node.

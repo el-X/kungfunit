@@ -10,9 +10,9 @@ var $ = require('gulp-load-plugins')({
 
 gulp.task('partials', function () {
     return gulp.src([
-            path.join(conf.paths.src, '/app/**/*.html'),
-            path.join(conf.paths.tmp, '/serve/app/**/*.html')
-        ])
+        path.join(conf.paths.src, '/app/**/*.html'),
+        path.join(conf.paths.tmp, '/serve/app/**/*.html')
+    ])
         .pipe($.htmlmin({
             removeEmptyAttributes: true,
             removeAttributeQuotes: true,
@@ -49,11 +49,9 @@ gulp.task('html', ['inject', 'partials'], function () {
         .pipe($.sourcemaps.write('maps'))
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
-        // .pipe($.sourcemaps.init())
         .pipe($.replace('../../bower_components/material-design-iconfont/iconfont/', '../fonts/'))
         .pipe($.cssnano())
         .pipe($.rev())
-        // .pipe($.sourcemaps.write('maps'))
         .pipe(cssFilter.restore)
         .pipe($.revReplace())
         .pipe(htmlFilter)
@@ -83,9 +81,9 @@ gulp.task('other', function () {
     });
 
     return gulp.src([
-            path.join(conf.paths.src, '/**/*'),
-            path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}')
-        ])
+        path.join(conf.paths.src, '/**/*'),
+        path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}')
+    ])
         .pipe(fileFilter)
         .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });

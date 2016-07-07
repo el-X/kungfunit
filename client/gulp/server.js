@@ -28,10 +28,10 @@ function browserSyncInit(baseDir, browser) {
 
     /*
      * A proxy can be added to the backend by uncommenting the line below.
-     * For that a context needs to be configured which will we redirected and the target url.
+     * In order for that to happen a target url and a context needs to be configured which will we redirected to.
      * Example: $http.get('/users') requests will be automatically proxified.
      *
-     * For more details and option look at: https://github.com/chimurai/http-proxy-middleware/blob/v0.9.0/README.md
+     * For more details and options take look at: https://github.com/chimurai/http-proxy-middleware/blob/v0.9.0/README.md
      */
     // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', changeOrigin: true});
 
