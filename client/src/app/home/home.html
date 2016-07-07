@@ -1,32 +1,41 @@
+<!-- All unit converters, the logger and the unit filters are defined in here -->
 <div layout="row" layout-xs="column">
-    <!-- unit converters and the logger to the left -->
-    <md-grid-list md-cols="3" md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-cols-lg="3" md-cols-xl="3"
-                  md-row-height="260px" md-gutter="8px" class="converter-grid-margin" flex>
-        <!-- unit converters -->
+    <!-- the unit converters and the logger are represented as a mobile-friendly grid list on the left side of the page -->
+    <md-grid-list class="converter-grid-margin" md-cols="3" md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-cols-lg="3"
+                  md-cols-xl="3" md-row-height="260px" md-gutter="8px" flex>
+        <!-- the unit converters are generated as a grid-tile based on the information provided by the backend -->
         <md-grid-tile ng-repeat="quantity in vm.unitQuantities | orderBy:'name'"
                       ng-if="vm.isUnitQuantitySelected(quantity.name)"
                       ng-init="quantityName = quantity.name">
-            <md-card layout-fill class="converter-hover">
+            <md-card class="converter-hover" layout-fill>
+                <!-- the header contains the quantity name, an optional datepicker and a close button -->
                 <md-card-header>
                     <md-card-header-text class="md-headline">
                         {{ quantityName }}
                     </md-card-header-text>
-                    <md-datepicker class="converter-date-input" ng-if="quantityName == 'Currency'"
+                    <!-- the grid-tile for the currency converter is tagged on with a datepicker -->
+                    <md-datepicker class="converter-date-input"
+                                   ng-if="quantityName == 'Currency'"
                                    ng-model="$parent.date"
-                                   ng-change="vm.convertFromLeftToRight($parent)"
                                    ng-init="$parent.date = vm.date;"
-                                   md-min-date="vm.minDate" md-max-date="vm.maxDate"
+                                   ng-change="vm.convertFromLeftToRight($parent)"
+                                   md-min-date="vm.minDate"
+                                   md-max-date="vm.maxDate"
                                    md-open-on-focus
                                    required>
                     </md-datepicker>
-                    <md-button class="md-icon-button converter-close-icon" ng-click="vm.toggleConverterSelection(quantityName)"
+                    <md-button class="md-icon-button converter-close-icon"
+                               ng-click="vm.toggleConverterSelection(quantityName)"
                                aria-label="Close converter">
                         <md-icon>close</md-icon>
                     </md-button>
                 </md-card-header>
+                <!-- the content of the grid-tile consists of input and dropdown fields -->
                 <md-card-content layout="row">
+                    <!-- the left hand side input fields -->
                     <div layout="column" flex="45">
                         <md-input-container md-no-float>
+                            <!-- in order to prevent the logger from being spammed with inputs, a debounce is added -->
                             <input ng-model="lhsValue" ng-change="vm.convertFromLeftToRight(this)"
                                    ng-model-options="{ debounce: 1000 }" type="number"
                                    aria-label="Left hand side value">
@@ -34,7 +43,7 @@
                         <md-input-container>
                             <md-select ng-model="lhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
                                        aria-label="Left hand side unit">
-                                <!-- select the first unit -->
+                                <!-- select the first unit on init -->
                                 <md-option ng-repeat="unit in quantity.units" ng-value="unit"
                                            ng-selected="$first">
                                     {{unit.name}}
@@ -43,6 +52,7 @@
                         </md-input-container>
                     </div>
                     <h2 flex="10" class="md-headline converter-equals-sign">=</h2>
+                    <!-- the right hand side input fields -->
                     <div layout="column" flex="45">
                         <md-input-container md-no-float>
                             <input ng-model="rhsValue" ng-change="vm.convertFromRightToLeft(this)"
@@ -52,7 +62,7 @@
                         <md-input-container>
                             <md-select ng-model="rhsUnit" md-on-close="vm.convertFromLeftToRight(this)"
                                        aria-label="Right hand side unit">
-                                <!-- select the second unit -->
+                                <!-- select the second unit on init -->
                                 <md-option ng-repeat="unit in quantity.units" ng-value="unit"
                                            ng-selected="$index == 1">
                                     {{unit.name}}
@@ -63,7 +73,7 @@
                 </md-card-content>
             </md-card>
         </md-grid-tile>
-        <!-- logger -->
+        <!-- the logger always sits underneath the converters, but is absent on mobile devices -->
         <md-grid-tile md-colspan="1" md-colspan-md="2" md-colspan-lg="3" md-colspan-xl="3" hide-xs hide-sm>
             <md-card layout-fill>
                 <md-card-header>
@@ -81,7 +91,7 @@
             </md-card>
         </md-grid-tile>
     </md-grid-list>
-    <!-- unit converter search input to the right (which is only displayed when no mobile device is used) -->
+    <!-- the filter for the unit converters is placed on the right side of the page; on mobile devices it's placed on top of the page -->
     <md-card flex="33" flex-xs="100" flex-order-xs="-1">
         <md-card-header>
             <md-card-header-text>
@@ -89,20 +99,23 @@
             </md-card-header-text>
         </md-card-header>
         <md-card-content layout="column">
+            <!-- the input field for the filter is case-insensitive and matches for all occurences -->
             <md-input-container md-no-float flex>
                 <md-icon>search</md-icon>
                 <input type="text" ng-model="searchTerm.name" placeholder="Search for a converter">
             </md-input-container>
             <div ng-repeat="class in vm.unitClasses">
                 <span class="md-subhead converter-filter-subheader">{{class.name}}</span>
-                <md-grid-list md-row-height="80px" md-cols="3" md-cols-sm="2" md-cols-xs="2" md-gutter="16px"
-                              class="converter-filter-grid-margin">
+                <!-- the buttons for the selectable units are responsive/mobile-friendly as well -->
+                <md-grid-list class="converter-filter-grid-margin" md-cols="3" md-cols-sm="2" md-cols-xs="2"
+                              md-row-height="80px" md-gutter="16px">
                     <md-grid-tile ng-repeat="quantity in class.quantities | orderBy:'name' | filter:searchTerm"
                                   ng-init="quantityName = quantity.name">
-                        <md-button md-whiteframe="2" ng-click="vm.toggleConverterSelection(quantityName)"
-                                   class="converter-filter-button" layout-fill>
+                        <md-button class="converter-filter-button" ng-click="vm.toggleConverterSelection(quantityName)"
+                                   md-whiteframe="2" layout-fill>
                             <span class="md-subhead" md-highlight-text="searchTerm.name" md-highlight-flags="i">{{quantityName}}</span>
                         </md-button>
+                        <!-- selected converters/quantities are marked with a tick, which also acts as a button -->
                         <md-button class="md-fab md-mini converter-filter-check-button"
                                    ng-click="vm.toggleConverterSelection(quantityName)"
                                    ng-show="vm.isUnitQuantitySelected(quantityName)">

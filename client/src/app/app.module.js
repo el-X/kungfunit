@@ -11,5 +11,4 @@
         'ngResource',
         'ui.router',
         'ui.router.title']);
-
 })();

@@ -2,20 +2,17 @@
   "name": "kungfunit-client",
   "version": "0.0.1",
   "dependencies": {
+    "angular": "~1.5.3",
     "angular-animate": "~1.5.3",
-    "jquery": "~2.1.4",
+    "angular-material": "~1.0.0",
+    "angular-moment": "^0.10.3",
     "angular-resource": "~1.5.3",
     "angular-ui-router": "~0.2.15",
-    "angular-material": "~1.0.0",
-    "material-design-iconfont": "~0.0.2",
-    "malarkey": "yuanqing/malarkey#~1.3.1",
-    "angular-toastr": "~1.5.0",
-    "moment": "~2.10.6",
-    "animate.css": "~3.4.0",
-    "angular": "~1.5.3",
     "angular-ui-router-title": "~0.0.4",
-    "ng-lodash": "^0.5.0",
-    "angular-moment": "^0.10.3"
+    "jquery": "~2.1.4",
+    "material-design-iconfont": "~0.0.2",
+    "moment": "~2.10.6",
+    "ng-lodash": "^0.5.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.3"

@@ -7,11 +7,12 @@
         ])
         .factory('unitService', unitService);
 
-    /*
+    /**
      * This service factory represents the interface to the REST-API.
      * It provides functions for retrieving unit information and converting units.
+     *
+     * @ngInject
      */
-    /** @ngInject */
     function unitService($resource) {
         var service = $resource('http://localhost:8080/units/', {}, {
             getUnits: {

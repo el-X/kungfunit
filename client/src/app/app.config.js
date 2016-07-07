@@ -7,16 +7,16 @@
 
     /** @ngInject */
     function config($logProvider, $mdThemingProvider) {
-        // Enable log
+        // enable logging
         $logProvider.debugEnabled(true);
 
+        // configure the Angular Material theme colors
         $mdThemingProvider.theme('default')
             .primaryPalette('grey')
             .accentPalette('blue-grey')
             .warnPalette('red')
             .backgroundPalette('grey', {
                 'default': 'A100'             // use white as the background color
-        });
+            });
     }
-
 })();

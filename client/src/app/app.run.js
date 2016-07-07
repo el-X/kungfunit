@@ -9,5 +9,4 @@
     function runBlock($log) {
         $log.debug('Initialization finished');
     }
-
 })();

@@ -15,6 +15,5 @@
         it('should be compiled', function () {
             expect(element.html()).not.toEqual(null);
         });
-
     });
 })();

@@ -17,9 +17,10 @@
                 }
             },
             resolve: {
-                $title: function() { return 'Datasets'; }   // the page title
+                $title: function () {
+                    return 'Datasets';  // the page title
+                }
             }
         });
     }
-
 })();
