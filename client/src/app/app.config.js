@@ -6,7 +6,10 @@
         .config(config);
 
     /** @ngInject */
-    function config($logProvider, $mdThemingProvider) {
+    function config($locationProvider, $logProvider, $mdThemingProvider) {
+        // use the HTML5 History API
+        $locationProvider.html5Mode(true);
+
         // enable logging
         $logProvider.debugEnabled(true);
 

@@ -12,7 +12,6 @@ var units = require('./routes/units');
 var unitUtils = require('./utils/unit-utils');
 
 var app = express();
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -23,8 +22,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/units', units);
 
-
 unitUtils.initCurrencyRates();
+
+// If nothing matches, the index file will be sent to the client side where Angular will take care of it.
+// This is needed due to the fact that express cannot handle URLs without the hash control
+app.use('/*', function (req, res) {
+    var indexFile = path.resolve(__dirname, './public/index.html');
+    res.sendFile(indexFile);
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
