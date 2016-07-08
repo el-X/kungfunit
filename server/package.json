@@ -7,7 +7,7 @@
   "apidoc": {
     "name": "KungFunit",
     "title": "KungFunit",
-    "url": "https://kungfunit.appspot.com",
+    "url": "https://kung-funit.appspot.com",
     "template": {
       "forceLanguage": "en",
       "withCompare": false,
@@ -20,7 +20,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "monitor": "nodemon ./bin/www",
-    "deploy": "gcloud preview app deploy --project kungfunit"
+    "deploy": "gcloud preview app deploy --project kung-funit"
   },
   "dependencies": {
     "async": "^2.0.0-rc.6",

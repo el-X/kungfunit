@@ -9,7 +9,7 @@ var unitUtils = require('../utils/unit-utils');
  * @api {get} /units Request all supported units
  * @apiDescription Returns all supported unit classes, quantities and their corresponding units.
  * @apiExample Example usage:
- *      https://kungfunit.appspot.com/units
+ *      https://kung-funit.appspot.com/units
  * @apiName GetUnits
  * @apiGroup Units
  *
@@ -63,10 +63,10 @@ router.get('/', function (req, res) {
  * @api {get} /units/convert Convert a list of units
  * @apiDescription Returns the conversions for the provided values of a unit.
  * @apiExample Example usage:
- *      https://kungfunit.appspot.com/units/convert?q=1&source=km&target=m
- *      https://kungfunit.appspot.com/units/convert?q=1&q=2&source=kg&target=g
- *      https://kungfunit.appspot.com/units/convert?q=1&source=USD&target=EUR&date=2014-07-13
- *      https://kungfunit.appspot.com/units/convert?q=1&q=2&source=EUR&target=GBP&date=2016-06-23
+ *      https://kung-funit.appspot.com/units/convert?q=1&source=km&target=m
+ *      https://kung-funit.appspot.com/units/convert?q=1&q=2&source=kg&target=g
+ *      https://kung-funit.appspot.com/units/convert?q=1&source=USD&target=EUR&date=2014-07-13
+ *      https://kung-funit.appspot.com/units/convert?q=1&q=2&source=EUR&target=GBP&date=2016-06-23
  * @apiName GetConversion
  * @apiGroup Units
  *

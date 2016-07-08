@@ -7,7 +7,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "https://kungfunit.appspot.com/units/convert?q=1&source=km&target=m\nhttps://kungfunit.appspot.com/units/convert?q=1&q=2&source=kg&target=g\nhttps://kungfunit.appspot.com/units/convert?q=1&source=USD&target=EUR&date=2014-07-13\nhttps://kungfunit.appspot.com/units/convert?q=1&q=2&source=EUR&target=GBP&date=2016-06-23",
+        "content": "https://kung-funit.appspot.com/units/convert?q=1&source=km&target=m\nhttps://kung-funit.appspot.com/units/convert?q=1&q=2&source=kg&target=g\nhttps://kung-funit.appspot.com/units/convert?q=1&source=USD&target=EUR&date=2014-07-13\nhttps://kung-funit.appspot.com/units/convert?q=1&q=2&source=EUR&target=GBP&date=2016-06-23",
         "type": "json"
       }
     ],
@@ -100,7 +100,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "https://kungfunit.appspot.com/units",
+        "content": "https://kung-funit.appspot.com/units",
         "type": "json"
       }
     ],

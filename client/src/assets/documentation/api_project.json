@@ -1,7 +1,7 @@
 {
   "name": "KungFunit",
   "title": "KungFunit",
-  "url": "https://kungfunit.appspot.com",
+  "url": "https://kung-funit.appspot.com",
   "template": {
     "forceLanguage": "en",
     "withCompare": false,
@@ -13,7 +13,7 @@
   "apidoc": "0.2.0",
   "generator": {
     "name": "apidoc",
-    "time": "2016-07-08T16:50:21.196Z",
+    "time": "2016-07-08T17:13:48.836Z",
     "url": "http://apidocjs.com",
     "version": "0.14.0"
   }
