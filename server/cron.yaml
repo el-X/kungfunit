@@ -1,3 +1,5 @@
+# Specifies regularly scheduled tasks that operate at defined times or regular intervals by the App Engine
+
 cron:
 - description: update currency rates
   url: /units/currencies/update

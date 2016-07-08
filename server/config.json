@@ -1,3 +1,8 @@
 {
-  "GCLOUD_PROJECT": "kung-funit"
+  "GCLOUD_PROJECT": "kungfunit",
+  "CURRENCY_RATE_API_URL": "https://api.fixer.io/",
+  "CURRENCY_RATE_BASE": "EUR",
+  "CURRENCY_RATE_DATE_FORMAT": "YYYY-MM-DD",
+  "CURRENCY_RATE_DATASTORE_KIND": "Rates",
+  "CURRENCY_RATE_TIME_SPAN": 5
 }

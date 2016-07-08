@@ -1,7 +1,7 @@
 {
   "name": "kungfunit-server",
-  "description": "The REST-API and server-side implementation of KungFunit",
-  "version": "0.0.1",
+  "description": "REST-API of KungFunit",
+  "version": "1.0.0",
   "private": true,
   "author": "Alexander Keller",
   "apidoc": {
@@ -35,7 +35,6 @@
     "money": "^0.2.0",
     "morgan": "^1.7.0",
     "request": "^2.72.0",
-    "serve-favicon": "~2.3.0",
     "winston": "^2.2.0"
   }
 }

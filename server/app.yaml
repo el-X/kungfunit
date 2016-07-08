@@ -1,5 +1,7 @@
-runtime: nodejs
-vm: true
+# The node.js Google App Engine runtime configuration.
+
+runtime: nodejs # Name of the Google App Engine language runtime used by this application
+vm: true        # Make use of the flexible environment
 
 # Setting to keep gcloud from uploading node_modules
 skip_files:

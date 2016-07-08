@@ -1,38 +1,38 @@
 'use strict';
 
-const CURRENCY_RATE_TIME_SPAN = 5;
-const DATE_FORMAT = "YYYY-MM-DD";
-const DATASTORE_KIND = "Rates";
-const CURRENCY_RATE_API_URL = "https://api.fixer.io/";
-
 var async = require('async');
 var config = require('../config');
-var fx = require('money');
 var gcloud = require('gcloud');
 var lodash = require('lodash');
 var logger = require('winston');
 var math = require('mathjs');
 var moment = require('moment');
+var money = require('money');
 var request = require('request');
 
-process.env.GCLOUD_PROJECT = process.env.GCLOUD_PROJECT ? process.env.GCLOUD_PROJECT : config['GCLOUD_PROJECT'];
+const CURRENCY_RATE_API_URL = config.CURRENCY_RATE_API_URL;
+const CURRENCY_RATE_TIME_SPAN = config.CURRENCY_RATE_TIME_SPAN;
+const CURRENCY_RATE_DATE_FORMAT = config.CURRENCY_RATE_DATE_FORMAT;
+const CURRENCY_RATE_DATASTORE_KIND = config.CURRENCY_RATE_DATASTORE_KIND;
+
+// Provide the datastore with a corresponding App Engine project ID
+process.env.GCLOUD_PROJECT = process.env.GCLOUD_PROJECT ? process.env.GCLOUD_PROJECT : config.GCLOUD_PROJECT;
 var datastore = gcloud.datastore({
     projectId: process.env.GCLOUD_PROJECT
 });
 
-var unitUtils = {};
-var rates = {};
-
-fx.base = "EUR";    // the base currency
+var unitUtils = {};                         // module for this file
+var rates = {};                             // locally stored currency rates
+money.base = config.CURRENCY_RATE_BASE;     // base currency to be used for the currency conversions
 
 /**
- * Converts the given values from a source to a specific target unit.
- * Only units other than currencies are allowed.
+ * Converts the provided values from a source to a specific target unit.
+ * Only units other than currencies are processed within this function.
  *
  * @param values the values to be converted
- * @param source the values source unit
- * @param target the values target unit
- * @returns {number} the value for the desired target unit
+ * @param source the unit to be converted from
+ * @param target the unit to be converted to
+ * @returns {Array} the values for the desired target unit
  */
 unitUtils.convertUnit = function (values, source, target) {
     var conversions = [];
@@ -43,30 +43,30 @@ unitUtils.convertUnit = function (values, source, target) {
     });
 
     return conversions;
-}
+};
 
 /**
  * Converts the provided currency values from a source to a specific target currency.
- * Only currencies are supported.
+ * Only currencies are processed within this function.
  *
  * @param values the currency values to be converted
- * @param source the values source currency
- * @param target the values target currency
+ * @param source the currency to be converted from
+ * @param target the currency to be converted to
  * @param date the date indication for the currency rate
- * @returns {array} an array containing the currency values for the desired target currency
+ * @returns {Array} an array containing the currency values for the desired target currency
  */
 unitUtils.convertCurrency = function (values, source, target, date) {
     var conversions = [];
-    fx.rates = rates[date];
+    money.rates = rates[date];
 
     lodash.each(values, function (value) {
-        var conversion = fx(value).from(source).to(target);
+        var conversion = money(value).from(source).to(target);
         conversion = math.round(conversion, 2);
         conversions.push({"convertedUnit": conversion});
     });
 
     return conversions;
-}
+};
 
 /**
  * Updates the currency rates by requesting new ones for the current date and deleting older rates prior to the
@@ -75,7 +75,7 @@ unitUtils.convertCurrency = function (values, source, target, date) {
 unitUtils.updateCurrencyRates = function () {
     var currentDate = getDateForDaysPrior(0);
     requestCurrencyRatesForDate(currentDate, handleUpdatedCurrencyRates);
-}
+};
 
 /**
  * Initializes the currency rates on startup for the given currency rate time span.
@@ -98,13 +98,13 @@ unitUtils.initCurrencyRates = function () {
             deleteRatesFromDatastorePriorDate(datePrior);
         }
     );
-}
+};
 
 /**
  * Performs an initialization of the currency rates for a specific date.
  *
  * @param date the date for which the currency rates should be initialized
- * @param loopCallback callback function to be run when the initialization for the given date completed
+ * @param loopCallback callback function to be run when the initialization for the given date finished
  */
 function initCurrencyRatesForDate(date, loopCallback) {
     loadCurrencyRatesFromDatastoreForDate(date, function (error, result) {
@@ -116,15 +116,15 @@ function initCurrencyRatesForDate(date, loopCallback) {
  * Responsible for loading datastore currency rates for a specific date.
  *
  * @param date the date for which the currency rates should be loaded
- * @param callback the callback function handling the results of the loading procedure
+ * @param callback the callback function which handles the results of the loading procedure
  */
 function loadCurrencyRatesFromDatastoreForDate(date, callback) {
-    var ratesKey = datastore.key([DATASTORE_KIND, date]);
+    var ratesKey = datastore.key([CURRENCY_RATE_DATASTORE_KIND, date]);
     datastore.get(ratesKey, callback);
 }
 
 /**
- * Attempts to retrieve the currency rates from the datastore. Two things could go wrong here.
+ * Attempts to retrieve the currency rates from the datastore. Two things can happen here.
  * First: Currency rates for the given date don't exist. In this case the currency rate API is called whose result is
  * then stored in the datastore and in the local storage.
  * Second: The datastore service could not be reached. In that case the currency rate API is called whose result is only
@@ -148,7 +148,6 @@ function attemptDatastoreRetrieval(date, result, loopCallback) {
 
 /**
  * Pass-through function for requesting the currency rates for a certain date.
- * The currency API of choice is Fixer.io.
  *
  * @param date the date for which the currency rates should be requested
  * @param callback the callback function for the finished request
@@ -180,11 +179,11 @@ function handleInitializedCurrencyRates(error, response, body, date) {
 /**
  * Saves the given currency rates for the provided date to the datastore.
  *
- * @param date the date for which the datastore should be saved
+ * @param date the date for which the currency rates should be saved
  * @param rates the currency rates to be stored in the datastore
  */
 function saveCurrencyRatesToDatastoreForDate(date, rates) {
-    var ratesKey = datastore.key([DATASTORE_KIND, date]);
+    var ratesKey = datastore.key([CURRENCY_RATE_DATASTORE_KIND, date]);
 
     datastore.upsert({
         key: ratesKey,
@@ -202,7 +201,7 @@ function saveCurrencyRatesToDatastoreForDate(date, rates) {
  * @param priorDate currency rate entities prior to this date will be deleted
  */
 function deleteRatesFromDatastorePriorDate(priorDate) {
-    var dateKey = datastore.key([DATASTORE_KIND, priorDate]);
+    var dateKey = datastore.key([CURRENCY_RATE_DATASTORE_KIND, priorDate]);
     var query = datastore.createQuery()
         .filter('__key__', "<", dateKey)
         .select('__key__');
@@ -217,6 +216,7 @@ function deleteRatesFromDatastorePriorDate(priorDate) {
 
 /**
  * Callback request function for handling the updated currency rates.
+ * It takes of deleting currency rates prior to the time span and populating the currency rates for the current date.
  *
  * @param error possible error thrown by the request
  * @param response the response of the request
@@ -237,13 +237,13 @@ function handleUpdatedCurrencyRates(error, response, body) {
 }
 
 /**
- * Helper function for returning a date string in the desired format.
+ * Helper function for returning a date string in the currency rate date format.
  *
- * @param daysPrior determines how many days prior to the current one, the date should be returned
+ * @param daysPrior determines how many days prior to the current one the date should be returned
  * @returns {string} the date of the desired day as a string
  */
 function getDateForDaysPrior(daysPrior) {
-    return moment().subtract(daysPrior, 'days').format(DATE_FORMAT);
+    return moment().subtract(daysPrior, 'days').format(CURRENCY_RATE_DATE_FORMAT);
 }
 
 module.exports = unitUtils;

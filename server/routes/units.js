@@ -23,7 +23,7 @@ var unitUtils = require('../utils/unit-utils');
  * @apiSuccess {Object[]} data.classes.quantities.units All units that are subordinated to the quantity.
  * @apiSuccess {Object} data.classes.quantities.units[i] A specific unit.
  * @apiSuccess {String} data.classes.quantities.units.name The name of the unit.
- * @apiSuccess {String} data.classes.quantities.units.symbol The symbol of the unit which is used for the conversion.
+ * @apiSuccess {String} data.classes.quantities.units.symbol The symbol of the unit, which is used for the conversion.
  * @apiSuccessExample {json} Response (example):
  * {
  *   "data": {
@@ -60,24 +60,25 @@ router.get('/', function (req, res) {
 });
 
 /**
- * @api {get} /units/convert Converts a list of units
- * @apiDescription Returns the conversions for a certain unit.
+ * @api {get} /units/convert Convert a list of units
+ * @apiDescription Returns the conversions for the provided values of a unit.
  * @apiExample Example usage:
  *      https://kungfunit.appspot.com/units/convert?q=1&source=km&target=m
- *      https://kungfunit.appspot.com/units/convert?q=1&q=2&q=3&source=kg&target=g
- *      https://kungfunit.appspot.com/units/convert?q=1&source=USD&target=EUR&date=2016-06-22
+ *      https://kungfunit.appspot.com/units/convert?q=1&q=2&source=kg&target=g
+ *      https://kungfunit.appspot.com/units/convert?q=1&source=USD&target=EUR&date=2014-07-13
+ *      https://kungfunit.appspot.com/units/convert?q=1&q=2&source=EUR&target=GBP&date=2016-06-23
  * @apiName GetConversion
  * @apiGroup Units
  *
- * @apiParam {Number} q The values that should be converted
- * @apiParam {String} source The symbolic representation of the source values unit
- * @apiParam {String} target The symbolic representation of the unit to converted to
- * @apiParam {String} date The date of the conversion rate that should be used.
+ * @apiParam {Number} q The value(s) that should be converted.
+ * @apiParam {String} source The symbolic representation of the unit to convert from.
+ * @apiParam {String} target The symbolic representation of the unit to convert to.
+ * @apiParam {String} date The optional date of the conversion rate that should be used.
  *
  * @apiSuccess {Object} data Wrapping data container for the result.
- * @apiSuccess {Object[]} data.conversions A list containing all of the conversion results.
+ * @apiSuccess {Object[]} data.conversions A list containing all of the conversion results in the order requested.
  * @apiSuccess {Object} data.conversions[i] A specific conversion.
- * @apiSuccess {Object} data.conversions.convertedUnit The numeric result of the conversion.
+ * @apiSuccess {Number} data.conversions.convertedUnit The numeric result of the conversion.
  * @apiSuccessExample {json} Response (example):
  * {
  *   "data": {
@@ -112,12 +113,12 @@ router.get('/convert', function (req, res) {
     };
 
     res.json(response);
-})
-;
+});
 
 /**
- * Update the currency rates. This function is called in regular intervals by a corresponding cron job.
- **/
+ * Update the currency rates. This route is called in regular intervals by a corresponding cron job.
+ * The route itself is meant for internal use only and is therefore not publicly documented.
+ */
 router.get('/currencies/update', function (req, res) {
     unitUtils.updateCurrencyRates();
     res.sendStatus(200);
